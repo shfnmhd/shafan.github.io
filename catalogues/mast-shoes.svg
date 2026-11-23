@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="360" viewBox="0 0 560 360">
+<title>Orange and slate running shoe</title><defs>
+<linearGradient id="b" x2="1" y2="1"><stop stop-color="#283047"/><stop offset="1" stop-color="#101726"/></linearGradient>
+<linearGradient id="o" x2=".8" y2="1"><stop stop-color="#ffb47c"/><stop offset=".52" stop-color="#ee7649"/><stop offset="1" stop-color="#b63d25"/></linearGradient>
+<pattern id="m" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1" fill="#281329" opacity=".4"/></pattern>
+</defs><rect width="560" height="360" fill="url(#b)"/>
+<g fill="none" stroke="#d5b8a9" opacity=".23"><circle cx="280" cy="176" r="142"/><circle cx="280" cy="176" r="120"/><path d="M45 177h470M280 26v304M65 300h430" stroke-dasharray="3 6"/></g>
+<ellipse cx="282" cy="271" rx="197" ry="23" fill="#080d17" opacity=".75"/>
+<g transform="rotate(-9 281 184)"><path d="M100 218c7-15 4-43 9-59 5-17 17-21 30-14l22 17c14 8 34 7 48-7l24-27c13-15 30-13 44 0l34 32c26 23 65 31 114 44l22 11 10 25-341-2Z" fill="url(#o)" stroke="#6a352d" stroke-width="3"/>
+<path d="M139 160q40 39 82 1l21-22q11-12 22 1l34 30c24 21 55 31 98 44l31 15H125Z" fill="url(#m)"/>
+<path d="M114 159q10-17 25-8l30 23q-30 23-47 44l-14 2Z" fill="#b94830"/><path d="M222 161l22-25q11-11 23 2l44 39-14 17Z" fill="#26354a" stroke="#4d5360" stroke-width="3"/>
+<path d="M236 155l34-5m-21 16 34-5m-22 16 34-5m-21 16 29-5" stroke="#ffe5d1" stroke-width="4" stroke-linecap="round"/>
+<path d="M152 218q58-1 105-34l25 17q-43 30-101 34Z" fill="#26354a"/><path d="M320 194q30 15 73 24l32 10-82 5Z" fill="#f49161"/><path d="M102 225q10 5 42 5l252 3 52-9q12 6 13 15l-2 10q-65 15-153 14l-168-1q-43-1-45-15l3-20Z" fill="#f5dcc4" stroke="#342b34" stroke-width="3"/>
+<path d="M101 246q28 9 65 8l203-1q56-2 90-12v9q-32 15-84 18l-240-1q-34-3-40-12Z" fill="#293141"/>
+<path d="M110 254l22 8m27-4 19 7m29-8 20 8m82-8 20 7m32-10 20 7m27-13 20 7" stroke="#dc835c" stroke-width="3"/>
+<path d="M104 237q35 6 57 7l189 1q40-1 70-7" fill="none" stroke="#fff3e0" stroke-width="2" stroke-linecap="round"/></g>
+<g fill="none" stroke="#f59a68" stroke-width="2"><path d="M54 71V53h18m416 0h18v18M54 290v18h18m416 0h18v-18"/><path d="M65 105h27m-27 8h14M467 266h27m-14 8h14" opacity=".65"/></g></svg>

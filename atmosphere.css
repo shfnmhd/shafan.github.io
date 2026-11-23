@@ -1,0 +1,113 @@
+/* Decorative deep-space field. Motion is compositor-only at rest and tied to native scroll. */
+body{position:relative;isolation:isolate}
+body>.portfolio-atmosphere{
+  position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;user-select:none;
+  background:radial-gradient(ellipse at 70% 15%,#1c2851 0%,#121a34 32%,#0b1222 54%,#080e19 81%);
+}
+body>.portfolio-atmosphere::before,
+body>.portfolio-atmosphere::after,
+body>.portfolio-atmosphere>i{
+  content:"";position:absolute;pointer-events:none;display:block;background-repeat:no-repeat;
+}
+body>.portfolio-atmosphere>i:first-child{
+  z-index:0;inset:-16% -14% -23%;background:url("./atmosphere-nebula.svg") 52% 39% / cover no-repeat;
+  transform:translate3d(var(--space-cloud-x,0px),var(--space-cloud-y,0px),0) rotate(calc(var(--space-bank,0deg) * .54)) scale(var(--space-cloud-zoom,1));
+  opacity:.91;
+}
+body>.portfolio-atmosphere::before{
+  z-index:1;inset:-185px -10% -260px;background:url("./atmosphere-stars-far.svg") center / cover no-repeat;
+  transform:translate3d(var(--space-far-x,0px),var(--space-far-y,0px),0) rotate(calc(var(--space-bank,0deg) * -.33));
+  opacity:.85;
+}
+body>.portfolio-atmosphere>i:nth-child(2){
+  z-index:3;width:clamp(800px,86vw,1520px);aspect-ratio:1;
+  bottom:clamp(-1010px,-57vw,-590px);right:clamp(-520px,-26vw,-195px);
+  background:url("./atmosphere-planet.svg") center / contain no-repeat;
+  transform:translate3d(var(--space-limb-x,0px),var(--space-limb-y,0px),0) rotate(var(--space-bank,0deg)) scale(var(--space-limb-zoom,1));
+  opacity:.94;
+}
+body>.portfolio-atmosphere::after{
+  z-index:2;inset:-255px -20% -525px;background:url("./atmosphere-stars-near.svg") center / cover no-repeat;
+  transform:translate3d(var(--space-near-x,0px),var(--space-near-y,0px),0) rotate(calc(var(--space-bank,0deg) * 1.15));
+  opacity:.81;
+  mask-image:linear-gradient(115deg,#000b 0%,#0007 39%,#000 78%);
+}
+body>.portfolio-atmosphere>i.space-glints{
+  z-index:4;inset:-24% -15%;display:block;
+  transform:translate3d(var(--space-glint-x,0px),var(--space-glint-y,0px),0);
+}
+/* The passing limb light and near streaks follow the orbit, never a timer. */
+.space-glints b{
+  display:block;position:absolute;pointer-events:none;width:var(--star-size,3px);height:var(--star-size,3px);border-radius:50%;
+  background:#cfdbff;box-shadow:0 0 5px 1px #9ab6ffbc,0 0 14px 2px #7988ff55;
+  left:var(--star-x);top:var(--star-y);opacity:.48;
+}
+body>.portfolio-atmosphere>.space-eclipse{
+  z-index:2;inset:11% -11% -29% 23%;opacity:var(--space-light-power,0);
+  background:radial-gradient(ellipse at 70% 70%,#9c9afd29 0%,#575dc324 27%,#384ba920 39%,transparent 64%);
+  transform:translate3d(var(--space-light-x,0px),var(--space-light-y,0px),0) rotate(var(--space-bank,0deg));
+}
+body>.portfolio-atmosphere>.space-trails{
+  z-index:4;inset:0;opacity:var(--space-trail-power,0);
+  transform:translate3d(var(--space-trail-x,0px),var(--space-trail-y,0px),0);
+  mask-image:linear-gradient(90deg,transparent 12%,#0007 57%,#000 90%);
+}
+.space-trails b{
+  position:absolute;display:block;width:clamp(68px,14vw,230px);height:1px;top:37%;left:78%;
+  background:linear-gradient(90deg,transparent,#828cd640 71%,#d6edffdb);
+  box-shadow:0 0 10px #8497ee42;border-radius:8px;
+  transform:rotate(var(--space-trail-angle,-13deg)) scaleX(var(--space-trail-scale,.68));transform-origin:right;
+}
+.space-trails b:nth-child(2){top:57%;left:88%;width:clamp(48px,9vw,138px);opacity:.59}
+.space-trails b:nth-child(3){top:69%;left:63%;width:clamp(36px,6vw,88px);opacity:.39}
+.portfolio-atmosphere[data-space-motion="on"]::before{animation:space-far-idle 62s ease-in-out infinite alternate}
+.portfolio-atmosphere[data-space-motion="on"]>i:first-child{animation:space-cloud-idle 58s ease-in-out infinite alternate}
+.portfolio-atmosphere[data-space-hidden="true"]::before,
+.portfolio-atmosphere[data-space-hidden="true"]>i{animation-play-state:paused!important}
+@keyframes space-far-idle{from{translate:0 0}to{translate:18px 9px}}
+@keyframes space-cloud-idle{from{translate:0 0}to{translate:25px -12px}}
+.space-motion-toggle{
+  position:fixed;z-index:15;right:clamp(10px,2vw,29px);bottom:max(12px,env(safe-area-inset-bottom));
+  min-height:44px;display:inline-flex;align-items:center;gap:.52rem;padding:.39rem .74rem;
+  border:1px solid #7c92b582;border-radius:999px;background:#10172de8;color:#f0f4ff;
+  box-shadow:0 5px 22px #060b19b2;font:650 .74rem/1 system-ui,sans-serif;cursor:pointer;
+}
+.space-motion-toggle:hover{background:#22304d}
+.space-motion-toggle:focus-visible{outline:2px solid #baeff2;outline-offset:3px}
+.space-motion-toggle::before{
+  content:"";width:8px;height:8px;border-radius:50%;box-shadow:0 0 9px #a6ceeac2;background:#9de7dd;
+}
+.space-motion-toggle[aria-pressed="false"]::before{background:#9ba6b7;box-shadow:none}
+.space-motion-toggle:disabled{cursor:default}
+@media(max-width:650px){
+  body>.portfolio-atmosphere>i:first-child{inset:-15% -25% -20%;background-position:60% center}
+  body>.portfolio-atmosphere>i:nth-child(2){width:670px;bottom:-530px;right:-386px;opacity:.88}
+  body>.portfolio-atmosphere::after{inset:-245px -13% -410px;opacity:.70}
+  .space-motion-toggle{font-size:.69rem;padding-inline:.58rem}
+}
+@media(prefers-reduced-motion:reduce){
+  body>.portfolio-atmosphere::before,body>.portfolio-atmosphere::after,
+  body>.portfolio-atmosphere>i,.space-glints b{
+    animation:none!important;transform:none!important;translate:none!important
+  }
+  .space-eclipse,.space-trails{display:none!important}
+}
+@media(forced-colors:active){body>.portfolio-atmosphere{display:none}}
+@media print{.space-motion-toggle{display:none}}
+
+/* Read as sparse observatory marks, not interface chrome. Decorative on the portfolio only. */
+body>.portfolio-atmosphere[data-space-motion="on"]>.space-eclipse{
+  background:
+    url("./atmosphere-observatory.svg") right center / 100% 100% no-repeat,
+    radial-gradient(ellipse at 70% 70%,#9c9afd29 0%,#575dc324 27%,#384ba920 39%,transparent 64%);
+}
+@media(max-width:650px){
+  body>.portfolio-atmosphere[data-space-motion="on"]>.space-eclipse{
+    inset:7% -24% -23% 15%;
+    background-size:auto 75%,auto;
+    background-position:73% center,center;
+  }
+  .space-trails b{left:72%}
+  .space-trails b:nth-child(2){left:88%}
+  .space-trails b:nth-child(3){left:58%}
+}

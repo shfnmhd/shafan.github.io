@@ -1,1163 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shafan | Web Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0a0a0f;
-      --bg2: #0f0f17;
-      --bg3: #13131e;
-      --surface: #16161f;
-      --surface2: #1c1c28;
-      --border: #252535;
-      --border2: #2e2e45;
-      --green: #00ff88;
-      --green-dim: #00cc6a;
-      --green-mute: #00ff8820;
-      --green-mute2: #00ff8808;
-      --cyan: #00d4ff;
-      --cyan-mute: #00d4ff15;
-      --amber: #ffb347;
-      --amber-mute: #ffb34715;
-      --text: #e2e2f0;
-      --text2: #9898b0;
-      --text3: #5a5a75;
-      --mono: 'JetBrains Mono', monospace;
-      --sans: 'Space Grotesk', sans-serif;
-      --radius: 6px;
-      --radius-lg: 10px;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 15px;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
-
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(10,10,15,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--green);
-      text-decoration: none;
-      letter-spacing: 0.05em;
-    }
-
-    .nav-logo span { color: var(--text3); }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text2);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--green); }
-
-    .nav-links a::before {
-      content: './';
-      color: var(--text3);
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover::before { color: var(--green-dim); }
-
-    /* ── MAIN LAYOUT ── */
-    main { position: relative; z-index: 1; }
-
-    section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 100px 2rem 80px;
-    }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 56px;
-      max-width: 900px;
-      margin: 0 auto;
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-
-    .terminal-prompt {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--text3);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .terminal-prompt::before {
-      content: '';
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
-      display: inline-block;
-    }
-
-    .hero-name {
-      font-family: var(--mono);
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-name .cursor {
-      display: inline-block;
-      width: 3px;
-      height: 0.85em;
-      background: var(--green);
-      margin-left: 4px;
-      vertical-align: middle;
-      animation: blink 1s step-end infinite;
-      box-shadow: 0 0 8px var(--green);
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .hero-role {
-      font-family: var(--mono);
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      color: var(--green);
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.02em;
-    }
-
-    .hero-desc {
-      font-size: 16px;
-      color: var(--text2);
-      max-width: 560px;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-badges {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
-
-    .badge {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 4px 12px;
-      border-radius: 3px;
-      border: 1px solid;
-      letter-spacing: 0.06em;
-    }
-
-    .badge-green {
-      border-color: var(--green-dim);
-      color: var(--green);
-      background: var(--green-mute2);
-    }
-
-    .badge-cyan {
-      border-color: #00d4ff40;
-      color: var(--cyan);
-      background: var(--cyan-mute);
-    }
-
-    .badge-amber {
-      border-color: #ffb34740;
-      color: var(--amber);
-      background: var(--amber-mute);
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      padding: 10px 22px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid;
-    }
-
-    .btn-primary {
-      background: var(--green);
-      color: #000;
-      border-color: var(--green);
-      font-weight: 700;
-    }
-
-    .btn-primary:hover {
-      background: var(--green-dim);
-      border-color: var(--green-dim);
-      transform: translateY(-1px);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--green);
-      border-color: var(--border2);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--green-dim);
-      background: var(--green-mute2);
-    }
-
-    /* ── SECTION HEADERS ── */
-    .section-label {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--green);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-label::after {
-      content: '';
-      flex: 1;
-      max-width: 60px;
-      height: 1px;
-      background: var(--green-dim);
-      opacity: 0.4;
-    }
-
-    .section-title {
-      font-family: var(--mono);
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 2.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: var(--text2);
-      margin-bottom: 1rem;
-      line-height: 1.85;
-    }
-
-    .about-text p span { color: var(--green); }
-
-    .about-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      font-family: var(--mono);
-      font-size: 12px;
-    }
-
-    .about-card-title {
-      color: var(--text3);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .about-stat {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .about-stat:last-child { border-bottom: none; }
-    .about-stat-label { color: var(--text3); }
-    .about-stat-value { color: var(--green); }
-
-    /* ── SKILLS ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-
-    .skill-group {
-      background: var(--bg2);
-      padding: 1.5rem;
-      transition: background 0.2s;
-    }
-
-    .skill-group:hover { background: var(--surface); }
-
-    .skill-group-title {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--green);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .skill-group-title::before {
-      content: '#';
-      color: var(--text3);
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .skill-tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 3px 10px;
-      background: var(--bg3);
-      border: 1px solid var(--border2);
-      border-radius: 3px;
-      color: var(--text2);
-      transition: all 0.2s;
-    }
-
-    .skill-tag:hover {
-      border-color: var(--green-dim);
-      color: var(--green);
-      background: var(--green-mute2);
-    }
-
-    /* ── EXPERIENCE ── */
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 8px; bottom: 8px;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--green-dim), var(--border));
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2.5rem;
-      padding-bottom: 2.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .timeline-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -2.4rem;
-      top: 6px;
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
-      border: 2px solid var(--bg);
-    }
-
-    .timeline-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-
-    .timeline-title {
-      font-family: var(--mono);
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .timeline-date {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text3);
-      padding: 3px 10px;
-      border: 1px solid var(--border2);
-      border-radius: 3px;
-    }
-
-    .timeline-company {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--green);
-      margin-bottom: 1rem;
-    }
-
-    .timeline-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .timeline-bullets li {
-      font-size: 14px;
-      color: var(--text2);
-      padding-left: 1.2rem;
-      position: relative;
-      line-height: 1.7;
-    }
-
-    .timeline-bullets li::before {
-      content: '>';
-      position: absolute;
-      left: 0;
-      color: var(--green-dim);
-      font-family: var(--mono);
-      font-size: 11px;
-      top: 4px;
-    }
-
-    /* ── PROJECTS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      transition: all 0.25s;
-      position: relative;
-      overflow: hidden;
-      cursor: default;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--green-dim), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .project-card:hover {
-      border-color: var(--border2);
-      background: var(--surface2);
-      transform: translateY(-2px);
-    }
-
-    .project-card:hover::before { opacity: 1; }
-
-    .project-number {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text3);
-      margin-bottom: 0.75rem;
-    }
-
-    .project-name {
-      font-family: var(--mono);
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-
-    .project-desc {
-      font-size: 13px;
-      color: var(--text2);
-      line-height: 1.7;
-      margin-bottom: 1.25rem;
-    }
-
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .project-tech span {
-      font-family: var(--mono);
-      font-size: 10px;
-      padding: 2px 8px;
-      background: var(--bg3);
-      border: 1px solid var(--border2);
-      border-radius: 3px;
-      color: var(--cyan);
-    }
-
-    /* ── CERTIFICATIONS ── */
-    .certs-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-
-    .cert-item {
-      background: var(--bg2);
-      padding: 1.1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      transition: background 0.2s;
-    }
-
-    .cert-item:hover { background: var(--surface); }
-
-    .cert-icon {
-      width: 32px; height: 32px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--green);
-      background: var(--green-mute2);
-      flex-shrink: 0;
-    }
-
-    .cert-name {
-      font-size: 14px;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .cert-org {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text3);
-    }
-
-    /* ── LANGUAGES ── */
-    .langs-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .lang-chip {
-      font-family: var(--mono);
-      font-size: 12px;
-      padding: 6px 16px;
-      border: 1px solid var(--border2);
-      border-radius: 3px;
-      color: var(--text2);
-      background: var(--surface);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-
-    .lang-chip:hover {
-      border-color: var(--green-dim);
-      color: var(--green);
-    }
-
-    .lang-chip .fluent {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 4px var(--green);
-    }
-
-    .lang-chip .basic {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--border2);
-    }
-
-    /* ── CONTACT ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .contact-item {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--text2);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--surface);
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .contact-item:hover {
-      border-color: var(--green-dim);
-      color: var(--green);
-    }
-
-    .contact-item span:first-child {
-      color: var(--green);
-      width: 16px;
-      text-align: center;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-
-    .form-label {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text3);
-      letter-spacing: 0.08em;
-    }
-
-    .form-input, .form-textarea {
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      padding: 10px 14px;
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.2s;
-      resize: none;
-    }
-
-    .form-input:focus, .form-textarea:focus {
-      border-color: var(--green-dim);
-    }
-
-    .form-textarea { min-height: 100px; }
-
-    .form-submit {
-      background: var(--green);
-      color: #000;
-      border: none;
-      border-radius: var(--radius);
-      padding: 11px 22px;
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    .form-submit:hover { background: var(--green-dim); transform: translateY(-1px); }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 2.5rem 2rem;
-      border-top: 1px solid var(--border);
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text3);
-    }
-
-    footer span { color: var(--green); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-up { animation: fadeUp 0.6s ease forwards; opacity: 0; }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.45s; }
-    .delay-5 { animation-delay: 0.6s; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 680px) {
-      nav { padding: 0 1.25rem; }
-      .nav-links { gap: 1.2rem; }
-      .nav-links li:nth-child(n+4) { display: none; }
-      section { padding: 80px 1.25rem 60px; }
-      #hero { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .about-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .timeline { padding-left: 1.5rem; }
-      .timeline-dot { left: -1.9rem; }
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mohammad Sayyad Shafan — Web Development &amp; Cybersecurity</title>
+<meta name="description" content="Web development and cybersecurity portfolio of Mohammad Sayyad Shafan, based in Sharjah, UAE. Selected web work, defensive lab notes and technical background.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#080d16">
+<link rel="icon" href="mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="hero.css">
+<link rel="stylesheet" href="atmosphere.css">
+<script defer src="hero.js"></script>
+<script defer src="atmosphere.js"></script>
+<script defer src="reveal.js"></script>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="#hero">shafan<span>.dev</span></a>
-    <ul class="nav-links">
-      <li><a href="#about">about</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="#experience">experience</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
-  </nav>
-
-  <main>
-
-    <!-- HERO -->
-    <section id="hero">
-      <div class="terminal-prompt fade-up">~/shafan — zsh</div>
-      <h1 class="hero-name fade-up delay-1">
-        Mohammad Sayyad Shafan<span class="cursor"></span>
-      </h1>
-      <p class="hero-role fade-up delay-2">&gt; Full-Stack Web Developer</p>
-      <p class="hero-desc fade-up delay-3">
-        Building fast, secure, and scalable web applications. Proficient in React.js, Node.js, PHP/MySQL, and REST APIs — with a security-first mindset from hands-on OWASP experience.
-      </p>
-      <div class="hero-badges fade-up delay-4">
-        <span class="badge badge-green">Available for Work</span>
-        <span class="badge badge-cyan">Open to Relocation</span>
-        <span class="badge badge-amber">Kerala, India · Dubai UAE</span>
-      </div>
-      <div class="hero-cta fade-up delay-5">
-  <a class="btn btn-primary"
-     href="Shafan_WebDev_cv.pdf"
-     target="_blank">
-     View Resume
-  </a>
-
-  <a class="btn btn-ghost"
-     href="Shafan_WebDev_cv.pdf"
-     download>
-     Download CV
-  </a>
-</div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="section-label">01 &nbsp;/&nbsp; about</div>
-      <h2 class="section-title">About Me</h2>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            I'm a <span>Full-Stack Web Developer</span> based in Kerala, India, with a BCA from Srinivas University and hands-on internship experience in both web development and application security.
-          </p>
-          <p>
-            My development work spans <span>PHP/MySQL back-ends</span>, <span>React.js front-ends</span>, and <span>RESTful APIs</span> — plus a background in penetration testing that gives me a natural instinct for writing secure, production-grade code.
-          </p>
-          <p>
-            I'm fluent in English, Hindi, Urdu, Malayalam, and Kannada, and I'm comfortable working in fast-moving Agile teams or independently. Currently open to full-time roles and open to relocation.
-          </p>
-        </div>
-        <div class="about-card">
-          <div class="about-card-title">// quick_stats.json</div>
-          <div class="about-stat">
-            <span class="about-stat-label">degree</span>
-            <span class="about-stat-value">BCA</span>
-          </div>
-          <div class="about-stat">
-            <span class="about-stat-label">university</span>
-            <span class="about-stat-value">Srinivas Univ.</span>
-          </div>
-          <div class="about-stat">
-            <span class="about-stat-label">experience</span>
-            <span class="about-stat-value">1+ yr</span>
-          </div>
-          <div class="about-stat">
-            <span class="about-stat-label">projects</span>
-            <span class="about-stat-value">3+</span>
-          </div>
-          <div class="about-stat">
-            <span class="about-stat-label">location</span>
-            <span class="about-stat-value">Kerala / UAE</span>
-          </div>
-          <div class="about-stat">
-            <span class="about-stat-label">status</span>
-            <span class="about-stat-value" style="color: var(--green);">open_to_work</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills">
-      <div class="section-label">02 &nbsp;/&nbsp; skills</div>
-      <h2 class="section-title">Technical Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <div class="skill-group-title">Languages</div>
-          <div class="skill-tags">
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS3</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">ES6+</span>
-            <span class="skill-tag">PHP</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">TypeScript</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Frameworks & Libraries</div>
-          <div class="skill-tags">
-            <span class="skill-tag">React.js</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">Express.js</span>
-            <span class="skill-tag">Bootstrap</span>
-            <span class="skill-tag">Tailwind CSS</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Databases</div>
-          <div class="skill-tags">
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">PostgreSQL</span>
-            <span class="skill-tag">MongoDB</span>
-            <span class="skill-tag">Redis</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Tools & DevOps</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">GitHub</span>
-            <span class="skill-tag">Docker</span>
-            <span class="skill-tag">Postman</span>
-            <span class="skill-tag">Webpack</span>
-            <span class="skill-tag">Vite</span>
-            <span class="skill-tag">Linux</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Cloud & Platforms</div>
-          <div class="skill-tags">
-            <span class="skill-tag">AWS EC2</span>
-            <span class="skill-tag">AWS S3</span>
-            <span class="skill-tag">Apache</span>
-            <span class="skill-tag">CI/CD</span>
-            <span class="skill-tag">VMware</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Security & Practices</div>
-          <div class="skill-tags">
-            <span class="skill-tag">OWASP Top 10</span>
-            <span class="skill-tag">REST API</span>
-            <span class="skill-tag">JWT</span>
-            <span class="skill-tag">XSS/CSRF</span>
-            <span class="skill-tag">Agile</span>
-            <span class="skill-tag">Code Review</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <div class="section-label">03 &nbsp;/&nbsp; experience</div>
-      <h2 class="section-title">Work Experience</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-header">
-            <div class="timeline-title">Web Developer Intern</div>
-            <div class="timeline-date">Jan 2025 – May 2025</div>
-          </div>
-          <div class="timeline-company">Cognitive Solutions &nbsp;·&nbsp; India</div>
-          <ul class="timeline-bullets">
-            <li>Designed and developed scalable PHP/MySQL web applications, improving data management efficiency for core business operations.</li>
-            <li>Built responsive front-end interfaces using HTML5, CSS3, and JavaScript ensuring cross-browser compatibility and mobile-first design.</li>
-            <li>Integrated RESTful APIs and third-party services to extend application functionality and streamline workflows.</li>
-            <li>Debugged performance bottlenecks, achieving ~20% reduction in average page load time through query and asset optimisation.</li>
-            <li>Maintained version control with Git/GitHub; participated in code reviews within an Agile/Scrum team.</li>
-          </ul>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-header">
-            <div class="timeline-title">Cybersecurity Analyst Intern</div>
-            <div class="timeline-date">Sep 2025 – Apr 2026</div>
-          </div>
-          <div class="timeline-company">EyeQ Dot Net &nbsp;·&nbsp; India</div>
-          <ul class="timeline-bullets">
-            <li>Conducted web application security assessments following OWASP Top 10, identifying SQL Injection, XSS, and CSRF vulnerabilities.</li>
-            <li>Performed code-level security reviews, reinforcing secure coding practices — parameterised queries, output encoding, session management.</li>
-            <li>Produced detailed vulnerability reports with actionable remediation recommendations for development teams.</li>
-            <li>Analysed HTTP traffic using Burp Suite and Wireshark to identify anomalous patterns and validate security controls.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="section-label">04 &nbsp;/&nbsp; projects</div>
-      <h2 class="section-title">Featured Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-number">// project_01</div>
-          <div class="project-name">Skin Tone — E-commerce Platform</div>
-          <p class="project-desc">Full-stack e-commerce web app with product listings, cart management, role-based admin dashboard, appointment booking, delivery tracking, and automated email notifications.</p>
-          <div class="project-tech">
-            <span>PHP</span><span>MySQL</span><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Apache</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-number">// project_02</div>
-          <div class="project-name">Personal Portfolio Website</div>
-          <p class="project-desc">Fully responsive SPA built with React.js featuring component-based architecture, React Router, dark/light mode toggle, contact form validation, and a 95+ Lighthouse score.</p>
-          <div class="project-tech">
-            <span>React.js</span><span>CSS3</span><span>GitHub Pages</span><span>React Hooks</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-number">// project_03</div>
-          <div class="project-name">REST API — Task Manager</div>
-          <p class="project-desc">RESTful API with full CRUD, JWT authentication, role-based access control, request validation, rate limiting, and Docker containerisation with full API documentation.</p>
-          <div class="project-tech">
-            <span>Node.js</span><span>Express.js</span><span>MongoDB</span><span>JWT</span><span>Docker</span>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="project-number">// project_04</div>
-          <div class="project-name">Network Intrusion Detection</div>
-          <p class="project-desc">Deployed Snort 3 IDS on Kali Linux for real-time monitoring. Wrote custom detection rules for ICMP, DNS, HTTP, and SYN scan attacks with Wireshark integration.</p>
-          <div class="project-tech">
-            <span>Snort 3</span><span>Wireshark</span><span>Kali Linux</span><span>Networking</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CERTIFICATIONS -->
-    <section id="certifications">
-      <div class="section-label">05 &nbsp;/&nbsp; certifications</div>
-      <h2 class="section-title">Certifications</h2>
-      <div class="certs-list">
-        <div class="cert-item">
-          <div class="cert-icon">UD</div>
-          <div>
-            <div class="cert-name">The Complete Web Developer Bootcamp</div>
-            <div class="cert-org">Udemy · HTML5, CSS3, JavaScript, Node.js, MongoDB</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-icon">AWS</div>
-          <div>
-            <div class="cert-name">AWS Cloud Practitioner Essentials</div>
-            <div class="cert-org">Amazon Web Services Training &amp; Certification</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-icon">OW</div>
-          <div>
-            <div class="cert-name">IBM - Introduction to Cybesrsecurity Tools & Cyber Attacks</div>
-            <div class="cert-org">Coursera</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- LANGUAGES -->
-      <h2 class="section-title" style="margin-top: 3rem;">Languages</h2>
-      <div class="langs-row">
-        <div class="lang-chip"><span class="fluent"></span> English</div>
-        <div class="lang-chip"><span class="fluent"></span> Hindi</div>
-        <div class="lang-chip"><span class="fluent"></span> Urdu</div>
-        <div class="lang-chip"><span class="basic"></span> Malayalam</div>
-        <div class="lang-chip"><span class="basic"></span> Kannada</div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="section-label">06 &nbsp;/&nbsp; contact</div>
-      <h2 class="section-title">Get In Touch</h2>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p style="color: var(--text2); margin-bottom: 1rem; font-size: 14px; line-height: 1.8;">
-            I'm currently open to full-time web developer roles and freelance projects. Drop me a message — I typically respond within 24 hours.
-          </p>
-          <a class="contact-item" href="mailto:shafanmohd9712@gmail.com">
-            <span>@</span>shafanmohd9712@gmail.com
-          </a>
-          <a class="contact-item" href="tel:+971586692798">
-            <span>#</span>+971 586 692 798
-          </a>
-          <a class="contact-item" href="https://linkedin.com/in/shfn012" target="_blank">
-            <span>in</span>linkedin.com/in/shfn012
-          </a>
-          <a class="contact-item" href="https://github.com/shfnmhd">
-            <span>gh</span>https://github.com/shfnmhd
-          </a>
-        </div>
-        <form class="contact-form" onsubmit="handleSubmit(event)">
-          <div class="form-group">
-            <label class="form-label">// name</label>
-            <input class="form-input" type="text" placeholder="Your name" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">// email</label>
-            <input class="form-input" type="email" placeholder="your@email.com" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">// message</label>
-            <textarea class="form-textarea" placeholder="What's on your mind?" required></textarea>
-          </div>
-          <button class="form-submit" type="submit" id="submitBtn">
-            <span>send_message()</span>
-          </button>
-        </form>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>built<span>&lt;/&gt;</span> by Mohammad Sayyad Shafan &nbsp;·&nbsp; <span>2026</span></p>
-  </footer>
-
-  <script>
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      btn.innerHTML = '<span>message_sent ✓</span>';
-      btn.style.background = '#00cc6a';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.innerHTML = '<span>send_message()</span>';
-        btn.style.background = '';
-        btn.disabled = false;
-        e.target.reset();
-      }, 3000);
-    }
-
-    // Smooth active nav highlight
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(a => {
-            a.style.color = a.getAttribute('href') === '#' + entry.target.id
-              ? 'var(--green)' : '';
-          });
-        }
-      });
-    }, { threshold: 0.4 });
-
-    sections.forEach(s => observer.observe(s));
-  </script>
-
+<div class="portfolio-atmosphere" aria-hidden="true"><i></i><i></i></div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top" id="top"><div class="wrap nav">
+  <a class="identity" href="#top" aria-label="Shafan, back to top"><b>SHFN</b><span>Portfolio</span></a>
+  <nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a class="nav-contact" href="#contact">Contact</a></nav>
+</div></header>
+<main id="main" tabindex="-1">
+<section class="hero wrap" aria-labelledby="portfolio-title">
+ <div class="hero-head">
+  <p class="mono kicker"><span></span> Build / Defend <span class="universe-label">Technical Universe</span></p>
+  <p class="mono location">Sharjah, United Arab Emirates</p>
+ </div>
+ <div class="hero-grid">
+  <div class="intro">
+    <p class="name">Mohammad Sayyad Shafan</p>
+    <h1 id="portfolio-title">Web development<br><em>&amp; cybersecurity.</em></h1>
+    <p class="intro-copy">I build web tools that make technical information easier to use. My cybersecurity background shapes how I approach access, validation and the paths people take when something goes wrong.</p>
+    <div class="actions"><a class="button primary" href="#work">Explore selected work</a><a class="button secondary" href="#about">About me</a></div>
+  </div>
+  <figure class="model" aria-label="Interactive orbital developer workspace">
+    <div class="model-head"><span>ORBITAL WORKSPACE</span><span>INTERACTIVE 3D</span></div>
+    <div class="scene"><div id="hero-scene" aria-label="Illustrated developer workspace in orbit"></div></div>
+    <figcaption><b>Developer workspace in orbit</b><span>Browser / Editor / Terminal</span></figcaption>
+  </figure>
+ </div>
+</section>
+<section class="work wrap" id="work" aria-labelledby="work-title">
+ <div class="section-head">
+  <div><p class="mono kicker"><span></span> Selected work</p><h2 id="work-title">Projects and labs.</h2></div>
+  <p>Two ways I put technical detail to work: designing better interfaces and investigating what happens underneath them.</p>
+ </div>
+ <div class="projects">
+  <article class="project web">
+   <div class="preview"><img src="work/hudson-catalogue.svg" alt="Concept illustration of a web catalogue and cabinet viewer" width="720" height="450" loading="lazy"></div>
+   <div class="project-content"><p class="project-meta mono">Web development</p><h3>Hudson web catalogue</h3><p>A searchable product catalogue with a cabinet explorer, admin workflows and gated technical downloads.</p>
+   <details><summary>Read the case study</summary><div class="detail"><h4>The problem</h4><p>Visitors need a way to browse part numbers, see cabinet options and find the right document without starting from a long PDF.</p><h4>My contribution</h4><p>I worked on product discovery, mobile layouts and the 360° cabinet experience. I followed the journey from choosing a cabinet to checking compatible options and opening the associated technical document.</p><h4>Verification</h4><p>I checked the product and cabinet controls on desktop and mobile, and tested that a protected document stayed gated before verification.</p><p class="evidence">Project work · Catalogue UI · 360° interaction · Admin workflows</p></div></details></div>
+  </article>
+  <article class="project interface">
+   <div class="preview" aria-hidden="true">
+    <svg viewBox="0 0 360 180" fill="none"><defs><pattern id="ui-grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0v18" stroke="#c3dfd9" opacity=".4"/></pattern></defs><path fill="url(#ui-grid)" d="M0 0h360v180H0z"/><rect x="61" y="30" width="186" height="121" rx="8" fill="#fff" stroke="#8eb5ae"/><path d="M61 50h186M73 40h28m93 0h19m7 0h13" stroke="#568f85" stroke-width="2"/><rect x="74" y="64" width="97" height="12" rx="3" fill="#3d786e"/><path d="M75 86h74m-74 8h58" stroke="#7da69e" stroke-width="2"/><rect x="74" y="107" width="46" height="27" rx="3" fill="#e1eeeb"/><rect x="130" y="107" width="46" height="27" rx="3" fill="#e1eeeb"/><rect x="186" y="107" width="46" height="27" rx="3" fill="#e1eeeb"/><rect x="226" y="48" width="61" height="113" rx="8" fill="#f9ffff" stroke="#568f85" stroke-width="2"/><path d="M246 56h21m-29 22h33m-33 9h25m-25 16h37m-37 8h28" stroke="#568f85" stroke-width="2"/><rect x="238" y="123" width="37" height="17" rx="3" fill="#a4d0c5"/></svg>
+   </div>
+   <div class="project-content"><p class="project-meta mono">Front-end study</p><h3>This interactive portfolio</h3><p>A responsive, buildless frontend that puts written case studies and a small 3D experience on the same page.</p>
+   <details><summary>Read the case study</summary><div class="detail"><h4>The problem</h4><p>Make the portfolio engaging without asking visitors to download a large library or use a mouse to understand the work.</p><h4>How it’s built</h4><p>Plain HTML, CSS and JavaScript. Native disclosures keep each case readable without scripts. The model has a static alternative and controls for viewing it without dragging.</p><p class="evidence">Implementation study · Responsive design · Progressive enhancement</p></div></details></div>
+  </article>
+  <article class="project commerce">
+   <div class="preview" aria-hidden="true">
+    <svg viewBox="0 0 360 180" fill="none"><defs><pattern id="commerce-grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0v18" stroke="#415176" opacity=".38"/></pattern></defs><rect width="360" height="180" fill="#141d35"/><rect width="360" height="180" fill="url(#commerce-grid)"/><rect x="44" y="30" width="272" height="120" rx="8" fill="#202c49" stroke="#576d9a"/><path d="M44 50h272" stroke="#53698d"/><path d="M58 40h29m166 0h26m10 0h13" stroke="#93a7c9" stroke-width="2"/><rect x="56" y="61" width="148" height="78" rx="4" fill="#172039"/><rect x="214" y="61" width="90" height="78" rx="4" fill="#172039"/><path d="M66 74h52m104 0h41m-41 14h62m-62 10h49m-49 11h51" stroke="#879ec7" stroke-width="2"/><rect x="66" y="84" width="37" height="35" rx="3" fill="#506891"/><rect x="112" y="84" width="37" height="35" rx="3" fill="#55797f"/><rect x="158" y="84" width="36" height="35" rx="3" fill="#665d8e"/><path d="M68 126h31m15 0h24m22 0h31" stroke="#9eb1d2" stroke-width="2"/><rect x="222" y="118" width="58" height="11" rx="3" fill="#8ddbd3"/></svg>
+   </div>
+   <div class="project-content"><p class="project-meta mono">PHP / MySQL project</p><h3>Skin Tone</h3><p>A skincare web application combining a shop catalogue, appointments and order tracking.</p>
+   <details><summary>Read the case study</summary><div class="detail"><h4>The workflow</h4><p>Visitors can browse the catalogue, add items to a cart, book an appointment and track an order. Staff use a separate role-based admin area to manage the workflow.</p><h4>How it’s built</h4><p>The project uses PHP and MySQL for the application and data, with HTML, CSS and JavaScript for the browser interface.</p><p class="evidence">Project work · Catalogue and cart · Appointment workflow · Role-based admin</p></div></details></div>
+  </article>
+  <article class="project security">
+   <div class="preview"><img src="work/network-lab.svg" alt="Concept illustration of a network alert matched with captured traffic" width="720" height="450" loading="lazy"></div>
+   <div class="project-content"><p class="project-meta mono">Defensive security lab</p><h3>Network detection and triage</h3><p>Practising packet inspection and alert investigation with Wireshark and Snort in a controlled lab.</p>
+   <details><summary>Read the lab notes</summary><div class="detail"><h4>Investigation</h4><p>Compare a Snort alert with its corresponding packet capture. Review the protocol, direction and timing to understand what the alert can and cannot establish.</p><h4>What I learned</h4><p>The alert is a starting point, not a conclusion. I used the capture to add context and kept observed packet evidence separate from the interpretation.</p><p class="evidence">Lab practice only · No client traffic or production testing presented</p></div></details></div>
+  </article>
+ </div>
+ <section class="design-study" id="design-study" aria-labelledby="design-title">
+  <div class="section-head design-head">
+   <div><p class="mono kicker"><span></span> UI design breakdown</p><h3 id="design-title">From browsing to deciding.</h3></div>
+   <p>A design study in making a technical catalogue easier to scan, narrow and inspect on any screen.</p>
+  </div>
+  <div class="design-layout">
+   <figure class="design-board">
+    <img src="work/catalogue-design.svg" alt="Illustrated product catalogue in desktop and phone layouts, with search, filters and product cards" width="1040" height="620" loading="lazy">
+    <figcaption class="mono"><span>Interface concept</span><span>Desktop / Mobile · Not a production screenshot</span></figcaption>
+   </figure>
+   <ol class="design-notes">
+    <li class="design-note"><span class="mono" aria-hidden="true">01</span><div><h4>Browse by purpose</h4><p>Put product families first for visitors who know what they need, and keep part-number search close for those who already have a code.</p></div></li>
+    <li class="design-note"><span class="mono" aria-hidden="true">02</span><div><h4>Keep the filters visible</h4><p>Show active filters by the results so a shorter list makes sense. Give people a way back when a selection returns no matches.</p></div></li>
+    <li class="design-note"><span class="mono" aria-hidden="true">03</span><div><h4>Make inspection the next step</h4><p>Cards help people compare at a glance. Put detailed specs on the product page, and keep the next action clear when the layout stacks on mobile.</p></div></li>
+   </ol>
+  </div>
+ </section>
+ <aside class="appsec-note" aria-labelledby="appsec-title">
+  <img src="work/appsec-lab.svg" alt="Concept illustration of a browser, API and application access checks" width="720" height="450" loading="lazy">
+  <div><p class="project-meta mono">Authorised lab practice</p><h3 id="appsec-title">Application security</h3><p>My internship included controlled web and API security exercises. I practised documenting what a user should be allowed to do, where behaviour differed, and how the application should verify permissions and handle invalid input.</p></div>
+ </aside>
+ <article class="workspace-promo" aria-labelledby="workspace-title">
+  <div class="workspace-copy">
+   <p class="mono kicker"><span></span> Interactive demo</p>
+   <h3 id="workspace-title">Client design workspace</h3>
+   <p>Build a page section by section, refine its content and styling, and preview it at desktop, tablet or phone widths. Download a standalone HTML page or save it as a PDF. Your drafts stay in this browser.</p>
+   <a class="button primary" href="./workspace/">Open design workspace</a>
+  </div>
+  <div class="workspace-art" aria-hidden="true">
+   <div class="art-window">
+    <div class="art-top"><i></i><i></i><i></i><b>DESIGN WORKSPACE</b></div>
+    <div class="art-content">
+     <div class="art-brief"><small>PROJECT BRIEF</small><span></span><span></span><span></span><div class="art-swatches"><b></b><b></b><b></b></div></div>
+     <div class="art-preview"><small>DESIGN PREVIEW</small><em></em><span></span><span></span></div>
+    </div>
+   </div>
+  </div>
+ </article>
+ <section class="catalogue-demos" aria-labelledby="catalogue-demos-title">
+  <div class="section-head"><div><p class="mono kicker"><span></span> Interactive demos</p><h3 id="catalogue-demos-title">Catalogue collection</h3></div><p>Three working examples with fictional products and services. Browse them to see how the same catalogue idea adapts to different businesses.</p></div>
+  <div class="catalogue-grid">
+   <a class="catalogue-link stride" href="./catalogues/shoes/"><span class="catalogue-type mono">Shoes</span><strong>Stride</strong><span class="catalogue-action">Browse shoe catalogue</span></a>
+   <a class="catalogue-link fieldnote" href="./catalogues/clothing/"><span class="catalogue-type mono">Clothing</span><strong>Fieldnote</strong><span class="catalogue-action">Browse clothing catalogue</span></a>
+   <a class="catalogue-link goodwork" href="./catalogues/services/"><span class="catalogue-type mono">Services</span><strong>Goodwork</strong><span class="catalogue-action">Browse service catalogue</span></a>
+  </div>
+ </section>
+</section>
+<section class="capabilities wrap" id="capabilities" aria-labelledby="capabilities-title">
+ <div class="section-head"><div><p class="mono kicker"><span></span> Development capabilities</p><h2 id="capabilities-title">What I can build.</h2></div><p>I choose the stack around the job: easy content updates, a predictable mobile layout, or interactions that need more application logic.</p></div>
+ <div class="capability-grid">
+  <article class="capability"><h3>Content-managed websites</h3><p>Company sites, service pages and focused catalogues with reusable content sections that staff can update.</p><ul class="skills" aria-label="Tools for content-managed websites"><li>WordPress</li><li>PHP</li><li>MySQL</li></ul></article>
+  <article class="capability"><h3>Responsive front ends</h3><p>Landing pages and accessible interfaces where layouts, navigation and forms work on phones as well as desktops.</p><ul class="skills" aria-label="Tools for responsive front ends"><li>HTML, CSS &amp; JavaScript</li><li>Bootstrap</li><li>Tailwind CSS</li></ul></article>
+  <article class="capability"><h3>Interactive web applications</h3><p>Product search and filters, preview tools and dashboard screens with clear loading, empty and error states.</p><ul class="skills" aria-label="Tools for interactive web applications"><li>React</li><li>Next.js</li></ul></article>
+ </div>
+</section>
+<section class="about" id="about" aria-labelledby="about-title"><div class="wrap about-grid">
+ <div><p class="mono kicker"><span></span> About</p><h2 id="about-title">Build with the user in mind.<br><em>Think about what can go wrong.</em></h2></div>
+ <div class="about-text"><p>I’m Mohammad Sayyad Shafan, a BCA graduate based in Sharjah. My background includes PHP web development at Cognitive Solutions. My pre-sales work also helps me understand how people evaluate and use technical products.</p><p>On the web, I’m interested in clear product interfaces, interactive visualisation and workflows people can trust. In security, I’m interested in application security, network visibility and communicating findings clearly.</p><ul class="skills" aria-label="Tools and practice areas"><li>HTML, CSS &amp; JavaScript</li><li>REST APIs</li><li>Git &amp; Docker</li><li>Wireshark &amp; Snort</li><li>Application security</li></ul></div>
+</div></section>
+<section class="contact wrap" id="contact" aria-labelledby="contact-title">
+ <p class="mono kicker"><span></span> Contact</p><div class="contact-row"><div><h2 id="contact-title">Let’s connect.</h2><p>For web development and cybersecurity conversations, reach me on LinkedIn.</p></div><a class="button primary" href="https://ae.linkedin.com/in/shfn012">Connect on LinkedIn</a></div>
+</section>
+</main>
+<footer><div class="wrap foot"><span>Mohammad Sayyad Shafan</span><a href="#top">Back to top</a></div></footer>
 </body>
 </html>

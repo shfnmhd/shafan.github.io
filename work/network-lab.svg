@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 450" fill="none" role="img" aria-labelledby="t d">
+<title id="t">Defensive network analysis concept</title><desc id="d">A stepped signal trace and five connected nodes illustrate network observation, not real traffic.</desc>
+<defs>
+ <linearGradient id="bg" x1="18" y1="0" x2="630" y2="510" gradientUnits="userSpaceOnUse"><stop stop-color="#172430"/><stop offset="1" stop-color="#0b121c"/></linearGradient>
+ <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#263e50"/><stop offset="1" stop-color="#172430"/></linearGradient>
+ <radialGradient id="gl"><stop stop-color="#63dee3" stop-opacity=".17"/><stop offset="1" stop-color="#63dee3" stop-opacity="0"/></radialGradient>
+ <pattern id="g" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M0 26V0h26" stroke="#54768a" stroke-opacity=".26"/></pattern>
+</defs>
+<path fill="url(#bg)" d="M0 0h720v450H0z"/><ellipse cx="360" cy="232" rx="340" ry="205" fill="url(#gl)"/>
+<path fill="url(#g)" opacity=".52" d="M38 36h644v378H38z"/>
+<path d="M38 53V36h17m610 0h17v17M38 397v17h17m610 0h17v-17" stroke="#5a7487" stroke-width="2"/>
+<path d="M60 67h26M60 73h14m566 306h20m-13 7h13" stroke="#63dee3" stroke-width="2" opacity=".66"/>
+
+<path d="M88 307 357 370l273-78-267-56z" fill="#07111b" fill-opacity=".72"/>
+<path d="m99 146 268 64 255-78v156l-255 88L99 307z" fill="#13202e" stroke="#557181" stroke-width="2"/>
+<path d="m99 146 267-73 256 59-255 78z" fill="url(#plate)" stroke="#688595" stroke-width="2"/>
+<path d="m367 210 255-78v156l-255 88z" fill="#172939" stroke="#557181" stroke-width="2"/>
+<path d="m99 146 268 64v166L99 307z" fill="#101d2b" stroke="#557181" stroke-width="2"/>
+<path d="m121 183 222 55v104l-222-57z" fill="#0c1824" stroke="#304d5a" stroke-width="2"/>
+<path d="m138 209 190 47m-190-24 190 47m-190-24 190 47" stroke="#2a4a59" stroke-dasharray="4 4"/>
+<path d="m139 253 29 7 16-27 19 49 25-52 19 54 21-10 17 18 41 10" stroke="#6be8ea" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="m143 198 26 7" stroke="#e8b467" stroke-width="3" stroke-linecap="round"/>
+<path d="M253 137l103 25 105-29m-105 29 25-57m-25 57 89 23m-89-23-77 26" stroke="#72cbd1" stroke-width="2" stroke-dasharray="5 5"/>
+<g stroke="#98ebea" stroke-width="2">
+ <path d="m235 132 19-6 20 5-19 7z" fill="#32606f"/><path d="m235 132 20 6 19-7v10l-19 7-20-6z" fill="#1c3745"/>
+ <path d="m362 102 19-6 20 5-19 7z" fill="#32606f"/><path d="m362 102 20 6 19-7v10l-19 7-20-6z" fill="#1c3745"/>
+ <path d="m442 129 19-6 20 5-19 7z" fill="#32606f"/><path d="m442 129 20 6 19-7v10l-19 7-20-6z" fill="#1c3745"/>
+ <path d="m426 181 19-6 20 5-19 7z" fill="#32606f"/><path d="m426 181 20 6 19-7v10l-19 7-20-6z" fill="#1c3745"/>
+ <path d="m260 184 19-6 20 5-19 7z" fill="#32606f"/><path d="m260 184 20 6 19-7v10l-19 7-20-6z" fill="#1c3745"/>
+</g>
+<path d="m331 151 24-7 25 6-24 8z" fill="#d3a55f" stroke="#ffe09a" stroke-width="2"/><path d="m331 151 25 7 24-8v15l-24 9-25-7z" fill="#6a4d35" stroke="#f8c56d" stroke-width="2"/>
+<path d="m396 245 202-64m-202 78 202-64m-202 78 202-64" stroke="#507383" stroke-width="2" opacity=".65"/>
+<path d="m398 302 30-10m-30 23 16-5m137-42 44-15" stroke="#f0bd6e" stroke-width="3" stroke-linecap="round"/>
+
+</svg>

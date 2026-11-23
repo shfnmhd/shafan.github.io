@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none">
+<defs>
+  <radialGradient id="outer"><stop offset=".86" stop-color="#638cd3" stop-opacity="0"/><stop offset=".931" stop-color="#638cd3" stop-opacity=".31"/><stop offset=".961" stop-color="#6c66c2" stop-opacity=".12"/><stop offset="1" stop-color="#8a68c9" stop-opacity="0"/></radialGradient>
+  <linearGradient id="face" x1=".24" y1="0" x2=".77" y2=".61"><stop stop-color="#31496d"/><stop offset=".18" stop-color="#162941"/><stop offset=".47" stop-color="#0b182b"/><stop offset="1" stop-color="#070e1b"/></linearGradient>
+  <linearGradient id="limb" x1=".12" y1=".1" x2=".58" y2=".66"><stop stop-color="#b6c3fb" stop-opacity=".85"/><stop offset=".2" stop-color="#839ce2" stop-opacity=".82"/><stop offset=".41" stop-color="#6269ba" stop-opacity=".26"/><stop offset="1" stop-color="#5352a9" stop-opacity="0"/></linearGradient>
+  <radialGradient id="light"><stop stop-color="#759ae5" stop-opacity=".24"/><stop offset="1" stop-color="#3c547e" stop-opacity="0"/></radialGradient>
+  <clipPath id="disk"><circle cx="500" cy="500" r="464"/></clipPath>
+</defs>
+<circle cx="500" cy="500" r="500" fill="url(#outer)"/>
+<g clip-path="url(#disk)">
+<circle cx="500" cy="500" r="464" fill="url(#face)"/>
+<ellipse cx="435" cy="188" rx="550" ry="180" fill="url(#light)" transform="rotate(-24 435 188)"/>
+<g stroke-linecap="round">
+  <path d="M39 357c96-89 218-144 328-179 124-39 268-36 410-16M75 386c107-100 209-132 340-174 86-28 255-48 381-14" stroke="#88a0c6" stroke-opacity=".09" stroke-width="32"/>
+  <path d="M58 343C159 267 292 205 404 174c130-35 262-34 390-24M86 430c113-96 207-133 335-163 106-25 215-31 301-18" stroke="#8fafcf" stroke-opacity=".07" stroke-width="14"/>
+  <path d="M49 384c118-105 235-148 361-176 132-29 258-32 403-21M156 295c128-86 310-126 481-133" stroke="#a1bbdf" stroke-opacity=".11" stroke-width="3"/>
+</g>
+</g>
+<circle cx="500" cy="500" r="464" stroke="url(#limb)" stroke-width="2.2"/>
+<circle cx="500" cy="500" r="469" stroke="url(#limb)" stroke-width="2.4" opacity=".38"/>
+<circle cx="500" cy="500" r="475" stroke="url(#limb)" stroke-width="5" opacity=".13"/>
+</svg>

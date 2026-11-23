@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 620" fill="none" role="img" aria-labelledby="t d">
+<title id="t">Fictional product catalogue design concept</title><desc id="d">A full browser catalogue with an active search, category filters, route-ready product cards and a mobile panel that keeps controls within reach.</desc>
+<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#13192e"/><stop offset="1" stop-color="#0b101c"/></linearGradient><linearGradient id="desk" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#212d49"/><stop offset="1" stop-color="#121d30"/></linearGradient><linearGradient id="plate" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#263c56"/><stop offset="1" stop-color="#18263d"/></linearGradient><linearGradient id="active"><stop stop-color="#6ed7e2"/><stop offset="1" stop-color="#aa9af4"/></linearGradient><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M0 28V0h28" stroke="#445374" stroke-opacity=".29"/></pattern><radialGradient id="aura"><stop stop-color="#6f72b7" stop-opacity=".25"/><stop offset="1" stop-color="#626ea0" stop-opacity="0"/></radialGradient></defs>
+<rect width="1040" height="620" rx="26" fill="url(#bg)"/><rect x="18" y="18" width="1004" height="584" rx="18" fill="url(#grid)" opacity=".64"/><ellipse cx="538" cy="289" rx="490" ry="303" fill="url(#aura)"/>
+<path d="M38 45V33h12m940 0h12v12M38 575v12h12m940 0h12v-12" stroke="#627aa7" stroke-width="1.3"/>
+<text x="53" y="57" fill="#a8b7df" font-family="monospace" font-size="12" letter-spacing="2">INTERFACE STUDY / 01</text>
+<rect x="81" y="97" width="778" height="467" rx="22" fill="#080e1b" opacity=".75"/>
+<rect x="69" y="79" width="778" height="467" rx="20" fill="url(#desk)" stroke="#6580a9" stroke-width="1.3"/>
+<path d="M70 123h776" stroke="#5a709b" stroke-opacity=".8"/>
+<circle cx="92" cy="101" r="3.5" fill="#83dfe7"/><circle cx="105" cy="101" r="3.5" fill="#b69aef"/><circle cx="118" cy="101" r="3.5" fill="#526b91"/>
+<rect x="238" y="91" width="429" height="21" rx="10" fill="#111d31" stroke="#435b85"/><path d="M258 103v-4l3-2 3 2v4m-7 0h8v4h-8z" stroke="#7e9bb8"/><text x="279" y="106" fill="#a2b6d3" font-family="monospace" font-size="11">demo.local / catalogue / field-series</text>
+<path d="M111 163l9-9 9 9-9 9z" fill="url(#active)"/><text x="137" y="168" fill="#f0f4fb" font-size="16" font-family="system-ui" font-weight="750">Field Supply</text>
+<g fill="#a5b5d4" font-size="12" font-family="system-ui"><text x="648" y="166">Catalogue</text><text x="728" y="166">Shortlist</text></g><circle cx="793" cy="161" r="7" fill="#4d4e87"/><text x="790.2" y="165" fill="#eeeafd" font-size="10" font-family="system-ui">2</text>
+<path d="M105 187h706" stroke="#3c5175"/>
+<text x="110" y="228" fill="#f0f6ff" font-size="35" font-family="system-ui" font-weight="720" letter-spacing="-1.7">The field collection</text>
+<text x="111" y="248" fill="#abc2df" font-size="12" font-family="system-ui">Find the pieces that fit your workspace.</text>
+<rect x="111" y="270" width="440" height="39" rx="9" fill="#15243c" stroke="#85dbe4" stroke-width="1.6"/>
+<g stroke="#a4e3eb" stroke-width="1.6"><circle cx="129" cy="289" r="5"/><path d="m133 293 3 3"/></g><text x="147" y="294" fill="#eaf5ff" font-size="14" font-family="system-ui">desk</text><path d="M180 281v16" stroke="#a7e5ec"/>
+<rect x="570" y="270" width="122" height="39" rx="9" fill="#243759" stroke="#526c99"/><text x="586" y="294" fill="#c5d5ed" font-family="system-ui" font-size="12">Featured</text><path d="m671 287 5 5 5-5" stroke="#97aac9"/>
+<rect x="705" y="270" width="105" height="39" rx="9" fill="#3c376b" stroke="#9f9fea"/><path d="M718 282h14m-14 6h14m-14 6h14" stroke="#e1d7ff"/><text x="742" y="294" fill="#eee7ff" font-family="system-ui" font-size="12">Filters</text>
+<rect x="111" y="321" width="86" height="27" rx="13" fill="#2b515e" stroke="#79d5de"/><text x="123" y="339" fill="#dcfafe" font-family="system-ui" font-size="11">Desk tools</text>
+<rect x="205" y="321" width="82" height="27" rx="13" fill="#242f4c" stroke="#50658e"/><text x="219" y="339" fill="#b8c6e1" font-family="system-ui" font-size="11">In stock</text>
+<text x="712" y="338" fill="#abbcda" font-size="11" font-family="monospace">03 RESULTS</text>
+<rect x="111" y="366" width="216" height="146" rx="11" fill="#17263e" stroke="#4d6492"/>
+<rect x="119" y="374" width="200" height="82" rx="7" fill="url(#plate)"/><g transform="translate(157 373)"><ellipse cx="55" cy="73" rx="30" ry="5" fill="#121c30"/><path d="M37 67h37l6 6H31zM52 65V33l18-13 13 16" fill="#819fb4" stroke="#b2d1e3" stroke-width="2"/><path d="m72 22 15 4 10 17-25 6-9-13z" fill="#8cd6dc" stroke="#d6f3f5"/></g>
+<text x="124" y="480" fill="#f3f5ff" font-family="system-ui" font-size="13" font-weight="700">Desk lamp</text><text x="124" y="498" fill="#a5bbd8" font-family="system-ui" font-size="11">$68</text>
+<rect x="288" y="471" width="26" height="28" rx="6" fill="#233a56" stroke="#607798"/><path d="M296 479h10v12l-5-3-5 3z" stroke="#c3d5f6" fill="none"/><rect x="343" y="366" width="216" height="146" rx="11" fill="#17263e" stroke="#a68dee"/>
+<rect x="351" y="374" width="200" height="82" rx="7" fill="url(#plate)"/><g transform="translate(389 373)"><ellipse cx="55" cy="74" rx="40" ry="4" fill="#131b2e"/><path d="m22 47 64-15 22 11-64 17z" fill="#a995df" stroke="#cfc3ed"/><path d="m22 47 22 13v11L22 59zm22 13 64-17v11L44 71z" fill="#544c81" stroke="#aaa0cd"/><path d="M32 63v8m64-12v8" stroke="#92a1b9" stroke-width="3"/></g>
+<text x="356" y="480" fill="#f3f5ff" font-family="system-ui" font-size="13" font-weight="700">Monitor stand</text><text x="356" y="498" fill="#a5bbd8" font-family="system-ui" font-size="11">$54</text>
+<rect x="520" y="471" width="26" height="28" rx="6" fill="#544e89" stroke="#b8a5f4"/><path d="M528 479h10v12l-5-3-5 3z" stroke="#c3d5f6" fill="none"/><rect x="575" y="366" width="216" height="146" rx="11" fill="#17263e" stroke="#4d6492"/>
+<rect x="583" y="374" width="200" height="82" rx="7" fill="url(#plate)"/><g transform="translate(621 373)"><ellipse cx="56" cy="72" rx="42" ry="4" fill="#131b2e"/><path d="m18 40 65-10 26 13-65 16z" fill="#75aaba" stroke="#a4cdd1"/><path d="m18 40 26 19v13L18 52zm26 19 65-16v13L44 72z" fill="#405d6f" stroke="#7ba9b8"/><path d="m52 61 48-12" stroke="#aee4e2" stroke-width="3" stroke-dasharray="5 3"/></g>
+<text x="588" y="480" fill="#f3f5ff" font-family="system-ui" font-size="13" font-weight="700">Cable tray</text><text x="588" y="498" fill="#a5bbd8" font-family="system-ui" font-size="11">$24</text>
+<rect x="752" y="471" width="26" height="28" rx="6" fill="#233a56" stroke="#607798"/><path d="M760 479h10v12l-5-3-5 3z" stroke="#c3d5f6" fill="none"/>
+<path d="M851 130h52v40" stroke="#8fd9e1" stroke-opacity=".68" stroke-dasharray="4 4"/>
+<text x="861" y="108" fill="#a9cce7" font-family="monospace" font-size="11" letter-spacing="1">MOBILE</text>
+<rect x="809" y="176" width="180" height="378" rx="28" fill="#080e1a" opacity=".8"/>
+<rect x="793" y="160" width="180" height="378" rx="28" fill="#151e33" stroke="#a89ae8" stroke-width="2"/>
+<rect x="801" y="168" width="164" height="362" rx="21" fill="#1d2d47" stroke="#53668d"/>
+<rect x="858" y="177" width="50" height="4" rx="2" fill="#60708f"/>
+<path d="m817 202 7-7 7 7-7 7z" fill="#8adbe6"/><text x="838" y="207" fill="#e9f1fb" font-family="system-ui" font-size="13" font-weight="750">Field Supply</text>
+<text x="816" y="240" fill="#eef5fd" font-family="system-ui" font-size="17" font-weight="760">The collection</text>
+<rect x="814" y="253" width="138" height="27" rx="6" fill="#172741" stroke="#85dbe4"/><circle cx="827" cy="265" r="3.5" stroke="#a1def2"/><path d="m830 268 3 3" stroke="#a1def2"/><text x="841" y="270" fill="#d3e5f6" font-family="system-ui" font-size="10">desk</text>
+<rect x="814" y="287" width="67" height="21" rx="10" fill="#2b515e"/><rect x="887" y="287" width="65" height="21" rx="10" fill="#453b6d"/><text x="822" y="301" fill="#dcfafe" font-family="system-ui" font-size="9">Desk tools</text><text x="904" y="301" fill="#e8dcfe" font-family="system-ui" font-size="9">Filters</text>
+<rect x="814" y="319" width="138" height="109" rx="8" fill="#17263e" stroke="#6d83a7"/><rect x="821" y="325" width="124" height="62" rx="5" fill="url(#plate)"/>
+<g transform="translate(834 322) scale(.78)"><ellipse cx="55" cy="73" rx="30" ry="5" fill="#121c30"/><path d="M37 67h37l6 6H31zM52 65V33l18-13 13 16" fill="#819fb4" stroke="#b2d1e3" stroke-width="2"/><path d="m72 22 15 4 10 17-25 6-9-13z" fill="#8cd6dc" stroke="#d6f3f5"/></g>
+<text x="824" y="403" fill="#f3f5ff" font-family="system-ui" font-size="10" font-weight="700">Desk lamp</text><text x="824" y="418" fill="#b5c8e4" font-family="system-ui" font-size="9">$68</text>
+<rect x="814" y="438" width="138" height="59" rx="8" fill="#182840" stroke="#6577a0"/><path d="m843 463 53-11 16 9-53 12z" fill="#a995df" stroke="#ccbde8"/><rect x="855" y="516" width="56" height="3" rx="1.5" fill="#8196ba"/>
+<text x="62" y="581" fill="#92a8cf" font-family="monospace" font-size="11" letter-spacing="1">ACTIVE SEARCH  /  STICKY FILTERS  /  SAVED ITEMS</text>
+</svg>

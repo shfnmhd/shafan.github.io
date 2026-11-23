@@ -169,10 +169,10 @@ main[id],main section[id]{scroll-margin-top:1.25rem}
 .hero.hero-scrub .model:has(:focus-visible){transform:none}
 .work{position:relative}
 .work::before{content:"";position:absolute;pointer-events:none;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,#80edec 36%,#b2a0ff 61%,transparent);transform:scaleX(var(--orbit-line,.14));transform-origin:center;opacity:var(--orbit-light,.25)}
-.reveal-enter{animation:portfolio-arrival 760ms cubic-bezier(.2,.72,.23,1) var(--reveal-delay,0ms) both}
+.reveal-enter{animation:portfolio-arrival 490ms cubic-bezier(.2,.72,.23,1) var(--reveal-delay,0ms) both}
 .reveal-enter:focus-within,.reveal-enter:target{animation:none}
 @keyframes portfolio-arrival{
- from{opacity:.3;translate:0 var(--reveal-rise,44px);scale:.983}
+ from{opacity:.67;translate:0 var(--reveal-rise,23px);scale:.993}
  62%{opacity:1}
  to{opacity:1;translate:none;scale:1}
 }
@@ -262,3 +262,26 @@ body{background:#080d16}
    @keyframes read-reveal {from {opacity:0;transform:translateY(-4px)} to {opacity:1;transform:translateY(0)}}
  }
 }
+
+/* Motion UI accordion reference: height first, then a short stagger on the copy. */
+.project details summary::after,.project details[open]>summary::after{
+ content:"";background:center/15px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3.5 6 4.5 4 4.5-4' fill='none' stroke='%23106072' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+ rotate:0deg;transition:rotate .29s cubic-bezier(.2,.8,.2,1);
+}
+.project details[open]>summary::after{rotate:180deg}
+@supports (interpolate-size:allow-keywords) and selector(::details-content){
+ .project details::details-content{
+   transition:block-size .37s cubic-bezier(.19,.83,.25,1),opacity .22s ease,content-visibility .37s allow-discrete;
+ }
+ .project details .detail>*{
+  opacity:0;translate:0 5px;transition:opacity .17s ease,translate .24s cubic-bezier(.18,.79,.32,1);
+ }
+ .project details[open] .detail>*{opacity:1;translate:none;transition-delay:var(--read-beat,38ms)}
+ .project details .detail>:nth-child(n+3){--read-beat:72ms}
+ .project details .detail>:nth-child(n+5){--read-beat:101ms}
+}
+@media(prefers-reduced-motion:reduce){
+ .project details::details-content,.project details .detail>*,.project details summary::after{transition:none!important}
+}
+html[data-motion-preference="off"] .project details::details-content,html[data-motion-preference="off"] .project details .detail>*,html[data-motion-preference="off"] .project details summary::after{transition:none!important}
+html[data-motion-preference="off"] .project details summary::after{transition:none}

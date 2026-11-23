@@ -29,8 +29,8 @@
         const group = item.closest(".projects,.catalogue-grid,.capability-grid");
         const columns = group ? (getComputedStyle(group).gridTemplateColumns.match(/[^\s]+/g) || []).length : 0;
         const index = group ? Array.prototype.indexOf.call(group.children, item) : 0;
-        item.style.setProperty("--reveal-delay", (columns > 1 ? (index % columns) * 95 : 0) + "ms");
-        item.style.setProperty("--reveal-rise", (item.matches(".section-head") ? (small ? 25 : 36) : (small ? 32 : 49)) + "px");
+        item.style.setProperty("--reveal-delay", (columns > 1 ? (index % columns) * 62 : 0) + "ms");
+        item.style.setProperty("--reveal-rise", (item.matches(".section-head") ? (small ? 13 : 20) : (small ? 17 : 27)) + "px");
         item.classList.add("reveal-enter");
       }
     }, { rootMargin: "0px 0px -8% 0px", threshold: .06 });

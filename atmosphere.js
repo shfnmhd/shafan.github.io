@@ -53,7 +53,7 @@
   layer.append(light, trails);
   const clamp=(v,lo=0,hi=1)=>Math.max(lo,Math.min(hi,v));
   let frame=0,stage=1,range=1,active=null,strength=1,observer,path=approach;
-  let eased=null,previousY=window.scrollY,previousTime=0,momentum=0;
+  let eased=null,velocity=[],previousY=window.scrollY,previousTime=0,momentum=0;
   let properties="";
   function put(k,v,units="px"){properties+="--space-"+k+":"+v.toFixed(3)+units+";";}
   const pulse=(x,center,radius)=>{
@@ -82,12 +82,16 @@
     // Smoothing the pose also absorbs layout changes when a case study opens.
     const target=[...pose(targetQ),targetP,targetQ,targetAfter];
     const dt=previousTime?clamp(now-previousTime,1,50):16.7;
-    const ease=1-Math.exp(-dt/105);
+    // A critically damped spring follows the scroll without bounce or a fixed delay.
+    const seconds=dt/1000, stiffness=17, decay=Math.exp(-stiffness*seconds);
     let settling=false;
     eased=eased?eased.map((v,i)=>{
-      const delta=target[i]-v,threshold=i<3?.025:.00015;
-      if(Math.abs(delta)<=threshold)return target[i];
-      settling=true;return v+delta*ease;
+      const error=v-target[i], speed=velocity[i]||0, bias=speed+stiffness*error;
+      const offset=(error+bias*seconds)*decay;
+      const nextSpeed=(speed-stiffness*bias*seconds)*decay;
+      const threshold=i<3?.03:.00015;
+      if(Math.abs(offset)<threshold&&Math.abs(nextSpeed)<threshold*stiffness){velocity[i]=0;return target[i];}
+      settling=true;velocity[i]=nextSpeed;return target[i]+offset;
     }):target;
     const [x,rise,bank,zoom,p,q,after]=eased;
     const speed=Math.abs(clamp((y-previousY)/dt/1.8,-1,1));
@@ -129,7 +133,7 @@
   function visibility(){
     layer.dataset.spaceHidden=String(document.hidden);
     if(document.hidden&&frame){window.cancelAnimationFrame(frame);frame=0;}
-    previousY=window.scrollY;previousTime=0;momentum=0;eased=null;
+    previousY=window.scrollY;previousTime=0;momentum=0;eased=null;velocity=[];
     if(!document.hidden)measure();
   }
   function configure(){
@@ -151,7 +155,7 @@
     }else{
       window.removeEventListener("scroll",queue);window.removeEventListener("resize",measure);observer?.disconnect();
       if(frame)window.cancelAnimationFrame(frame);frame=0;
-      layer.removeAttribute("style");eased=null;
+      layer.removeAttribute("style");eased=null;velocity=[];
     }
   }
   toggle.addEventListener("click",()=>{

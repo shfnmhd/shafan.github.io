@@ -1,0 +1,55 @@
+/* Porcelain orbital edition. Keep graphics behind readable, light surfaces. */
+:root{color-scheme:light;--ink:#15263b;--muted:#42566b;--accent:#0d6371;--wash:#f5f9fc;--line:#cbd9e4;--deep:#122a40}
+body.porcelain{background:#fbfdff;color:var(--ink)}
+body.porcelain>.portfolio-atmosphere{background:radial-gradient(ellipse at 84% 24%,#dceaf4 0%,#f0f6fb 32%,#fbfdff 66%);contain:strict}
+body.porcelain>.portfolio-atmosphere>i:first-child{background:radial-gradient(ellipse at 24% 21%,#edf8fa 0%,transparent 32%),radial-gradient(ellipse at 76% 84%,#d6e5f170,transparent 52%);opacity:.85}
+body.porcelain>.portfolio-atmosphere>i:nth-child(2){width:clamp(700px,79vw,1250px);right:clamp(-490px,-24vw,-185px);bottom:clamp(-760px,-45vw,-405px);background-image:url("./porcelain-orbit.svg");opacity:.95}
+body.porcelain>.portfolio-atmosphere::before{background:radial-gradient(circle,#85a6ba 1px,transparent 1.7px) 0 0/117px 103px;opacity:.22}
+body.porcelain>.portfolio-atmosphere::after{background:radial-gradient(circle,#6f91ab 1.2px,transparent 2.4px) 20px 44px/219px 187px;opacity:.23}
+body.porcelain>.portfolio-atmosphere>.space-eclipse{background:radial-gradient(ellipse at 72% 70%,#a8ccdf5e,transparent 63%)}
+body.porcelain .space-glints b{background:#fff;box-shadow:0 0 0 1px #94aebb6e,0 0 11px #85a5be57;opacity:.8}
+body.porcelain .space-trails b{background:linear-gradient(90deg,transparent,#8baabb52,#7e9aad8c);box-shadow:none}
+body.porcelain .space-motion-toggle{background:#ffffffed;color:#1c3a50;box-shadow:0 6px 24px #1f45601c;border-color:#a4bcca}
+body.porcelain .space-motion-toggle:hover{background:#eef7fa}
+body.porcelain .space-motion-toggle::before{background:#147485;box-shadow:none}
+body.porcelain .space-motion-toggle[aria-pressed="false"]::before{background:#718594}
+.top{background:#fbfdfff5;border-color:#d7e3eb}
+.identity b{background:#193950;color:#e6f9fc;border-color:#193950}
+.identity span,.location,.name,.foot{color:#42566b}
+.nav-contact,.button.secondary{background:#fbfdffdb;color:#20384c;border-color:#a6bece}
+.nav nav a:hover,.foot a:hover{color:#0b5868}
+.hero-head,.work,.capabilities{border-color:#c5d6e2}
+.kicker,.project .project-meta{color:#106274}
+.project.commerce .project-meta{color:#34577d}
+.project.security .project-meta,.appsec-note .project-meta{color:#804615}
+.kicker>span:first-child{background:#2c8290;box-shadow:none}
+.hero-head .universe-label{color:#335a6d;background:#edf6fa;border-color:#b9d0df}
+.intro h1{color:#142a41;text-shadow:none}
+.intro h1 em,.about h2 em{color:#116575;text-shadow:none}
+.intro-copy,.section-head>p,.project-content>p:not(.project-meta),.detail p,.workspace-copy>p:not(.kicker),.design-note p,.capability p,.about-text p,.contact-row p,.appsec-note p:not(.project-meta){color:#3c5267}
+.button.primary{background:#125e6d;border-color:#125e6d;color:#fff;box-shadow:0 9px 25px #145b7032}
+.button.primary:hover{background:#0c4858;color:#fff;border-color:#0c4858}
+.button.secondary:hover{background:#edf6fb;color:#163a4e;border-color:#7299ac}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline-color:#166d80}
+#hero-scene button:focus-visible{outline-color:#b3f4ff}
+.model{box-shadow:0 25px 48px #243f6552,0 4px 12px #2336522b}
+.project,.workspace-promo,.design-note,.capability,.catalogue-link,.appsec-note,.contact-row{background:linear-gradient(153deg,#fff,#f5f9fdf7);border-color:#cad9e5;box-shadow:0 8px 22px #26405c0e,0 1px 4px #26405c08}
+.project:hover,.catalogue-link:hover{border-color:#89adbf}
+.project h3,.design-note h4,.capability h3,.catalogue-link strong{color:#172e45}
+.project details,.preview,.interface .preview,.security .preview{border-color:#c8d8e5}
+summary,summary:hover{color:#0d5e71}
+summary::after{border-color:#9fbbc8}
+.detail p.evidence{color:#215568;border-color:#408498}
+.interface .preview svg{filter:none}
+.design-board,.art-window{box-shadow:0 17px 37px #223b6240}
+.design-board figcaption span:first-child{color:#b0eeeb}
+.design-note>span,.design-note:nth-child(2)>span,.design-note:nth-child(3)>span{background:#edf5fa;color:#345d77;border-color:#b9cfdd}
+.skills li{background:#edf6fa;color:#294e65;border-color:#b6cfdb}
+.catalogue-link{--demo-accent:#166557}
+.catalogue-link.fieldnote{--demo-accent:#835319}
+.catalogue-link.goodwork{--demo-accent:#435e8d}
+.catalogue-link:hover{background:#edf6fa}
+.catalogue-link .catalogue-action{color:#304e67}
+.about,footer{background:#f3f8fbed;border-color:#cbdae6}
+.work::before{background:linear-gradient(90deg,transparent,#60b3c4 38%,#a1aada 64%,transparent)}
+@media(max-width:650px){body.porcelain>.portfolio-atmosphere>i:nth-child(2){width:622px;right:-270px;bottom:-390px;opacity:.77}}

@@ -244,3 +244,21 @@ body{background:#080d16}
 .model figcaption{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);gap:.4rem .8rem}
 .model figcaption b,.model figcaption span{min-width:0;overflow-wrap:anywhere}
 @media(max-width:23rem){.model figcaption{grid-template-columns:1fr;gap:.25rem}.model figcaption span{text-align:left}}
+
+/* Keep native disclosure semantics while animating the content in both directions. */
+@supports (interpolate-size: allow-keywords) and selector(::details-content) {
+ .project details {interpolate-size:allow-keywords}
+ .project details::details-content {
+   block-size:0;overflow:clip;opacity:0;
+   transition:block-size .32s cubic-bezier(.22,.75,.25,1),opacity .24s ease,content-visibility .32s allow-discrete;
+ }
+ .project details[open]::details-content {block-size:auto;opacity:1}
+ @media (prefers-reduced-motion:reduce) {.project details::details-content {transition:none}}
+ :root[data-motion-preference="off"] .project details::details-content {transition:none}
+}
+@supports not ((interpolate-size: allow-keywords) and selector(::details-content)) {
+ @media (prefers-reduced-motion:no-preference) {
+   :root:not([data-motion-preference="off"]) .project details[open] .detail {animation:read-reveal .26s ease-out}
+   @keyframes read-reveal {from {opacity:0;transform:translateY(-4px)} to {opacity:1;transform:translateY(0)}}
+ }
+}

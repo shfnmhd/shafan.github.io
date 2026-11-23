@@ -1,10 +1,12 @@
-#hero-scene{position:absolute;inset:0;min-height:0;isolation:isolate;background:url("./hero-fallback.svg") center / 94% auto no-repeat}
+#hero-scene{position:absolute;inset:0;min-height:0;isolation:isolate;background:url("./hero-fallback.svg?v=orbit2") center / 94% auto no-repeat}
 #hero-scene[data-ready]{background:none}
-#hero-scene canvas{display:block;width:100%;height:100%;position:absolute;inset:0;touch-action:pan-y;cursor:grab;outline:0}
+#hero-scene canvas{display:block;width:100%;height:calc(100% - 55px);position:absolute;inset:0 0 auto;touch-action:pan-y;cursor:grab;outline:0}
 #hero-scene canvas:active{cursor:grabbing}
 #hero-scene canvas:focus-visible{outline:2px solid #78d7de;outline-offset:-4px;border-radius:10px}
-.hs-controls{position:absolute;right:16px;bottom:16px;z-index:3;display:flex;gap:6px;align-items:center;font:11px/1.1 system-ui,sans-serif;letter-spacing:.075em}
+.hs-controls{position:absolute;right:16px;bottom:9px;z-index:3;display:flex;gap:6px;align-items:center;font:11px/1.1 system-ui,sans-serif;letter-spacing:.075em}
 .hs-controls button{border:1px solid #6c91a75c;background:#111d28;color:#d2e3e8;border-radius:7px;min-height:39px;padding:0 11px;font:inherit;cursor:pointer;white-space:nowrap}
 .hs-controls button:hover{border-color:#78d7de;background:#1b313a}
 .hs-controls button:focus-visible{outline:2px solid #78d7de;outline-offset:2px}
-@media(max-width:460px){.hs-controls{right:10px;bottom:10px}.hs-controls button{min-height:44px;min-width:44px}}
+@media(max-width:460px){.hs-controls{right:10px;bottom:6px}.hs-controls button{min-height:44px;min-width:44px}}
+
+#hero-scene:not([data-ready]){background-size:min(95%,38rem) auto;}

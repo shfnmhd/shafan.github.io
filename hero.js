@@ -23,25 +23,41 @@
   const motionAllowed=()=>!reduce.matches&&document.documentElement.dataset.motionPreference!=="off";
   let autoRequested=true;
   let spinning=motionAllowed(), w = 0, h = 0, ratio = 1, on = true;
-  let yaw = -.61, pitch = .67, ty = yaw, tp = pitch, raf = 0, last = 0, wave = 0, drag = null;
+  const homeYaw=-.28, homePitch=.49;
+  let autoBase=homeYaw, autoStart=0;
+  let yaw = homeYaw, pitch = homePitch, ty = yaw, tp = pitch, raf = 0, last = 0, wave = 0, drag = null;
   const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
   const lerp = (a,b,t) => a+(b-a)*t;
   const cyan = "#89e7ed", amber = "#ffc489";
   const decks = [
-    {x:-.92,y:.25,z:-.74,w:2.55,h:1.83,kind:"editor",edge:"#496779"},
-    {x:.26,y:.26,z:.37,w:2.78,h:1.82,kind:"browser",edge:"#76adbc"},
-    {x:1.03,y:-.59,z:.84,w:1.87,h:1.03,kind:"terminal",edge:"#557c8b"},
+    {x:-1.43,y:.72,z:-.08,w:2.37,h:1.62,kind:"editor",edge:"#496779"},
+    {x:1.36,y:.72,z:-.08,w:2.62,h:1.62,kind:"browser",edge:"#76adbc"},
+    {x:0,y:-.68,z:.17,w:2.03,h:.76,kind:"terminal",edge:"#557c8b"},
   ];
+
+  const TAU=Math.PI*2,N=70;
+  const sample=f=>Array.from({length:N+1},(_,i)=>f(i*TAU/N));
+  const circle=(r,y,q)=>[Math.cos(q)*r,y,Math.sin(q)*r];
+  const tilted=q=>[2.31*Math.cos(q),-.11+.40*Math.sin(q)+.22*Math.cos(q),2.03*Math.sin(q)];
+  const orbital=sample(tilted);
+  const fitPoints=[...orbital,...sample(q=>circle(2.49,-1.21,q)),...sample(q=>circle(2.30,-1.335,q)),
+    ...decks.flatMap(a=>[-1,1].flatMap(i=>[-1,1].flatMap(j=>[a.z,a.z-.095].map(z=>[a.x+i*a.w/2,a.y+j*a.h/2,z]))))];
 
   function draw(){
     if(!w||!h) return;
     ctx.clearRect(0,0,w,h);
     const sy=Math.sin(yaw),cy=Math.cos(yaw),sx=Math.sin(pitch),cx=Math.cos(pitch);
-    const unit=Math.min(w*.191,h*.188);
-    const project=([x,y,z])=>{
+    const view=([x,y,z])=>{
       const rx=cy*x+sy*z, rz=cy*z-sy*x, ry=cx*y-sx*rz, depth=sx*y+cx*rz, k=8.4/(8.4-depth);
-      return [w*.50+rx*unit*k,h*.430-ry*unit*k,depth];
+      return [rx*k,-ry*k,depth];
     };
+    let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
+    for(const v of fitPoints){
+      const [x,y]=view(v);minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);
+    }
+    const unit=Math.min(w*.184,h*.224,(w-24)/(maxX-minX),(h-24)/(maxY-minY));
+    const ox=w/2-(minX+maxX)*unit/2, oy=h/2-(minY+maxY)*unit/2;
+    const project=v=>{const [x,y,d]=view(v);return [ox+x*unit,oy+y*unit,d];};
     function shape(points,fill,stroke,width=.85){
       const xy=points.map(project);ctx.beginPath();ctx.moveTo(xy[0][0],xy[0][1]);
       xy.slice(1).forEach(([x,y])=>ctx.lineTo(x,y));ctx.closePath();
@@ -63,11 +79,6 @@
       ctx.fillStyle=c;ctx.fillRect(px-s*.5,py-s*.5,s,s);
       if(s>=1.2){ctx.fillStyle=c.slice(0,7)+"49";ctx.fillRect(px-3,py-.35,6,.7);ctx.fillRect(px-.35,py-3,.7,6);}
     });
-    const TAU=Math.PI*2,N=70;
-    const sample=(f)=>Array.from({length:N+1},(_,i)=>f(i*TAU/N));
-    const circle=(r,y,q)=>[Math.cos(q)*r,y,Math.sin(q)*r];
-    const tilted=q=>[2.31*Math.cos(q),.03+.46*Math.sin(q)+.28*Math.cos(q),2.03*Math.sin(q)];
-    const orbital=sample(tilted);
     const zOf=p=>project(p)[2];
     const segmentFront=(a,b)=>(zOf(a)+zOf(b))*.5>.23;
     const ribbon=(outer,inner,y,q0,q1,color,edge)=>shape([circle(outer,y,q0),circle(outer,y,q1),circle(inner,y,q1),circle(inner,y,q0)],color,edge);
@@ -109,6 +120,7 @@
     }
     station();
     orbitLayer(false);
+    orbitLayer(true);
     let deckOrder=[...decks].sort((a,b)=>project([a.x,a.y,a.z])[2]-project([b.x,b.y,b.z])[2]);
     for(const a of deckOrder){
       const D=.095, front=(u,v,z=a.z)=>[a.x+(u-.5)*a.w,a.y+(.5-v)*a.h,z];
@@ -174,13 +186,12 @@
         if(!spinning||Math.sin(wave*2.2)>.02)rect(.80,.703,.034,.078,cyan+"bb");
       }
     }
-    orbitLayer(true);
     root.setAttribute("data-ready","");
   }
   function frame(t){
     raf=0;if(!on||document.hidden){last=0;return;}
     const dt=last?Math.min(.040,(t-last)/1000):0;last=t;
-    if(spinning&&!drag){ty+=dt*.115;wave+=dt;}
+    if(spinning&&!drag){wave+=dt;ty=autoBase+Math.sin((wave-autoStart)*.29)*.25;}
     const easing=motionAllowed()?.17:1;
     yaw=lerp(yaw,ty,easing);pitch=lerp(pitch,tp,easing);
     draw();
@@ -205,16 +216,16 @@
     wake();
   }
   function resize(){
-    const r=root.getBoundingClientRect();
+    const r=canvas.getBoundingClientRect();
     w=Math.max(0,Math.round(r.width));h=Math.max(0,Math.round(r.height));ratio=Math.min(devicePixelRatio||1,1.75);
     canvas.width=Math.round(w*ratio);canvas.height=Math.round(h*ratio);ctx.setTransform(ratio,0,0,ratio,0,0);wake();
   }
   rotate.addEventListener("click",()=>{stop();ty+=Math.PI/4;wake();});
-  motion.addEventListener("click",()=>{if(!motionAllowed())return;autoRequested=!autoRequested;status();wake();});
+  motion.addEventListener("click",()=>{if(!motionAllowed())return;autoRequested=!autoRequested;if(autoRequested){autoBase=ty;autoStart=wave;}status();wake();});
   canvas.addEventListener("keydown", e=>{
     if(!["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","Home"].includes(e.key))return;
     e.preventDefault();stop();
-    if(e.key==="Home"){ty=-.61;tp=.67;}
+    if(e.key==="Home"){ty=homeYaw;tp=homePitch;}
     else if(e.key==="ArrowLeft")ty-=.23;
     else if(e.key==="ArrowRight")ty+=.23;
     else tp=clamp(tp+(e.key==="ArrowUp"?.12:-.12),.25,1.08);
@@ -236,7 +247,7 @@
   reduce.addEventListener("change",motionChanged);
   window.addEventListener("portfolio:motion-change",motionChanged);
   document.addEventListener("visibilitychange",()=>{last=0;if(!document.hidden)wake();});
-  if("ResizeObserver" in window)new ResizeObserver(resize).observe(root);else window.addEventListener("resize",resize);
+  if("ResizeObserver" in window)new ResizeObserver(resize).observe(canvas);else window.addEventListener("resize",resize);
   if("IntersectionObserver" in window)new IntersectionObserver(([entry])=>{on=entry.isIntersecting;last=0;if(on)wake();}).observe(root);
   status();resize();
 })();

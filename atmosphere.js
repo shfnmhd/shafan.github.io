@@ -51,11 +51,11 @@
   trails.className = "space-trails";
   for (let i = 0; i < 3; i++) trails.append(document.createElement("b"));
   layer.append(light, trails);
-  const keys = ["cloud-x","cloud-y","cloud-zoom","far-x","far-y","limb-x","limb-y","limb-zoom","near-x","near-y","glint-x","glint-y","bank","light-x","light-y","light-power","trail-x","trail-y","trail-power","trail-scale","trail-angle"];
   const clamp=(v,lo=0,hi=1)=>Math.max(lo,Math.min(hi,v));
   let frame=0,stage=1,range=1,active=null,strength=1,observer,path=approach;
-  let previousY=window.scrollY, previousTime=0, momentum=0;
-  function put(k,v,units="px"){layer.style.setProperty("--space-"+k,v.toFixed(3)+units);}
+  let eased=null,previousY=window.scrollY,previousTime=0,momentum=0;
+  let properties="";
+  function put(k,v,units="px"){properties+="--space-"+k+":"+v.toFixed(3)+units+";";}
   const pulse=(x,center,radius)=>{
     const q=clamp(1-Math.abs(x-center)/radius);
     return q*q*(3-2*q);
@@ -76,17 +76,24 @@
   }
   function draw(now){
     frame=0;
-    const y=window.scrollY, p=clamp(y/stage), q=clamp(y/range);
-    const after=range>stage?clamp((y-stage)/(range-stage)):0;
-    // Sample all knots in absolute normalized page space so the camera tangent
-    // stays continuous when the introductory and later arcs meet.
-    const [x,rise,bank,zoom]=pose(q);
-    const dt=previousTime?clamp(now-previousTime,12,64):16;
-    const speed=clamp((y-previousY)/dt/1.8,-1,1);
-    momentum=momentum*Math.exp(-dt/94)+speed*(1-Math.exp(-dt/28));
-    momentum=clamp(momentum,-1,1);
-    if(Math.abs(momentum)<.015)momentum=0;
-    previousY=y;previousTime=now;
+    const y=clamp(window.scrollY,0,range), targetP=clamp(y/stage), targetQ=clamp(y/range);
+    const targetAfter=range>stage?clamp((y-stage)/(range-stage)):0;
+    // Ease the rendered camera, not wheel events or the page’s scroll position.
+    // Smoothing the pose also absorbs layout changes when a case study opens.
+    const target=[...pose(targetQ),targetP,targetQ,targetAfter];
+    const dt=previousTime?clamp(now-previousTime,1,50):16.7;
+    const ease=1-Math.exp(-dt/105);
+    let settling=false;
+    eased=eased?eased.map((v,i)=>{
+      const delta=target[i]-v,threshold=i<3?.025:.00015;
+      if(Math.abs(delta)<=threshold)return target[i];
+      settling=true;return v+delta*ease;
+    }):target;
+    const [x,rise,bank,zoom,p,q,after]=eased;
+    const speed=Math.abs(clamp((y-previousY)/dt/1.8,-1,1));
+    momentum+=(speed-momentum)*(1-Math.exp(-dt/150));
+    if(momentum<.008)momentum=0;
+    previousY=y;previousTime=now;properties="";
     const tail=q*25;
     put("bank",bank*strength,"deg");
     put("cloud-x",x*.52*strength);put("cloud-y",(rise*.34-tail*.4)*strength);
@@ -105,8 +112,9 @@
     put("trail-x",(39+x*.96)*strength);put("trail-y",(40+rise*.86)*strength);
     put("trail-power",Math.abs(momentum)*passing*.72*strength,"");
     put("trail-scale",.68+Math.abs(momentum)*.68,"");
-    put("trail-angle",(-13+bank*2+(momentum<0?180:0)),"deg");
-    if(momentum)queue();
+    put("trail-angle",(-13+bank*2),"deg");
+    layer.style.cssText=properties;
+    if(settling||momentum)queue();else previousTime=0;
   }
   function queue(){if(!frame&&active&&!document.hidden)frame=window.requestAnimationFrame(draw);}
   function measure(){
@@ -121,7 +129,7 @@
   function visibility(){
     layer.dataset.spaceHidden=String(document.hidden);
     if(document.hidden&&frame){window.cancelAnimationFrame(frame);frame=0;}
-    previousY=window.scrollY;previousTime=0;momentum=0;
+    previousY=window.scrollY;previousTime=0;momentum=0;eased=null;
     if(!document.hidden)measure();
   }
   function configure(){
@@ -143,7 +151,7 @@
     }else{
       window.removeEventListener("scroll",queue);window.removeEventListener("resize",measure);observer?.disconnect();
       if(frame)window.cancelAnimationFrame(frame);frame=0;
-      for (const key of keys)layer.style.removeProperty("--space-"+key);
+      layer.removeAttribute("style");eased=null;
     }
   }
   toggle.addEventListener("click",()=>{

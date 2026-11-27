@@ -365,3 +365,4 @@
   if(shelf.blocked)status("Local storage is unavailable. You can still download the page.","error");
   else if(doc.title==="Earlier concept"&&!shelf.docs.length)status("Your earlier concept was copied into this builder. The original is unchanged.");
 })();
+

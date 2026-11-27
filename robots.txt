@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://shfnmhd.github.io/shafan.github.io/sitemap.xml

@@ -1,18 +1,8 @@
 .shoe-hero #shoe-turntable{position:absolute;z-index:-2;display:block;pointer-events:none}
-.shoe-hero #shoe-turntable[hidden],.shoe-hero #shoe-drag[hidden],.shoe-view-controls [hidden]{display:none!important}
+.shoe-hero #shoe-turntable[hidden],.shoe-hero #shoe-drag[hidden]{display:none!important}
 .shoe-hero:after{pointer-events:none}
 .shoe-hero #shoe-drag{position:absolute;z-index:2;cursor:grab;touch-action:pan-y;outline-offset:-3px;user-select:none;-webkit-user-select:none}
 .shoe-hero #shoe-drag.dragging{cursor:grabbing}
 .shoe-hero #shoe-drag:focus-visible{outline:2px solid #ffb477}
 .shoe-hero.shoe-view-on .hero-photo{translate:none!important;scale:none!important;transition:none!important;animation:none!important}
-.shoe-view-controls{position:absolute;right:4%;top:22px;z-index:4;display:flex;align-items:center;gap:4px}
-.shoe-view-controls button{appearance:none;border:1px solid #ffffff55;background:#141820e8;color:#fff;border-radius:999px;min-height:42px;padding:0 14px;font:700 12px/1.1 system-ui, sans-serif;cursor:pointer;white-space:nowrap}
-.shoe-view-controls button:focus-visible{outline:2px solid #ffb477;outline-offset:2px}
-.shoe-view-controls button:hover{background:#ff9c4c;color:#141820;border-color:#ff9c4c}
-#shoe-steps{display:flex;align-items:center;background:#141820e8;border:1px solid #ffffff55;border-radius:999px;padding:3px;gap:2px}
-#shoe-steps button{border:0;background:transparent;border-radius:50%;padding:0;width:40px;height:40px;color:#fff;font-size:23px;line-height:1}
-#shoe-steps button:hover{background:#ff9c4c;color:#141820}
-#shoe-angle{min-width:36px;text-align:center;color:#fff;font:700 12px/1 system-ui,sans-serif;font-variant-numeric:tabular-nums}
-@media(max-width:700px){.shoe-hero #shoe-turntable{z-index:1}.shoe-view-controls{top:auto;right:auto;bottom:16px;left:4%}.shoe-view-controls button{min-height:44px}#shoe-steps button{width:44px;height:44px}}
-@media(prefers-reduced-motion:reduce){.shoe-view-controls *{transition:none!important}}
-@media(max-width:360px){.shoe-view-controls{bottom:44px}}
+@media(max-width:700px){.shoe-hero #shoe-turntable{z-index:1}}

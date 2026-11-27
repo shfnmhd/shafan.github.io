@@ -44,8 +44,16 @@
   window.matchMedia("(min-width:681px)").addEventListener("change", () => closeMenu());
 
   const projects = $$(".project");
+  const projectGrid = $(".project-grid");
   const filterButtons = $$("[data-filter]");
   function filterProjects(filter, updateURL = true) {
+    // Keep the normal gallery order; in Commerce, lead with its large campaign card.
+    if (filter === "commerce") {
+      const featured = projects.find(project => project.dataset.key === "energy");
+      if (featured && projectGrid.firstElementChild !== featured) projectGrid.prepend(featured);
+    } else if (projectGrid.firstElementChild !== projects[0]) {
+      projectGrid.append(...projects);
+    }
     let count = 0;
     projects.forEach(project => { project.hidden = filter !== "all" && project.dataset.category !== filter; if (!project.hidden) count++; });
     filterButtons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.filter === filter)));

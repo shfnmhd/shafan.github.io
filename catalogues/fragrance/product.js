@@ -84,7 +84,7 @@ function build(){
  for(let j=0;j<3;j++){const pts=[];for(let n=0;n<128;n++){const a=n/128*Math.PI*2;pts.push(new THREE.Vector3(Math.cos(a)*(1.78+j*.32),Math.sin(a)*(1.60+j*.24),0))}
   const ring=new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x8e7256,transparent:true,opacity:.10+j*.028}));ring.rotation.z=(j-1)*.17;rings.add(ring)}
 
- resizeObserver=new ResizeObserver(resize);resizeObserver.observe(root);resize();render();fallback.hidden=true;canvas.hidden=false;root.dataset.ready='true';root.parentElement.querySelector('.hint').innerHTML='Move or swipe to explore <b aria-hidden="true">↔</b>';
+ resizeObserver=new ResizeObserver(resize);resizeObserver.observe(root);resize();render();fallback.hidden=true;canvas.hidden=false;root.dataset.ready='true';const hint=root.parentElement.querySelector('.hint'),arrow=document.createElement('b');arrow.setAttribute('aria-hidden','true');arrow.textContent='↔';hint.replaceChildren(document.createTextNode('Move or swipe to explore '),arrow);
 }
 function resize(){if(!renderer)return;const b=root.getBoundingClientRect();renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setSize(b.width,b.height,false);camera.aspect=b.width/b.height;camera.updateProjectionMatrix();render()}
 function render(){if(!renderer)return;object.rotation.set(pitch,yaw,0);object.scale.setScalar(scrollScale);object.position.y=scrollLift;shadow.rotation.z=-yaw*.2;if(rings){rings.rotation.z=storyProgress*.65; rings.scale.setScalar(1+storyProgress*.13);rings.children.forEach((r,i)=>{r.material.opacity=.10+i*.028+storyProgress*.09})}renderer.render(scene,camera);root.dataset.yaw=String(yaw);root.dataset.engine='three-webgl'}

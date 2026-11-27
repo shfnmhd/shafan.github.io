@@ -1,8 +1,0 @@
-.shoe-hero #shoe-turntable{position:absolute;z-index:-2;display:block;pointer-events:none}
-.shoe-hero #shoe-turntable[hidden],.shoe-hero #shoe-drag[hidden]{display:none!important}
-.shoe-hero:after{pointer-events:none}
-.shoe-hero #shoe-drag{position:absolute;z-index:2;cursor:grab;touch-action:pan-y;outline-offset:-3px;user-select:none;-webkit-user-select:none}
-.shoe-hero #shoe-drag.dragging{cursor:grabbing}
-.shoe-hero #shoe-drag:focus-visible{outline:2px solid #ffb477}
-.shoe-hero.shoe-view-on .hero-photo{translate:none!important;scale:none!important;transition:none!important;animation:none!important}
-@media(max-width:700px){.shoe-hero #shoe-turntable{z-index:1}}

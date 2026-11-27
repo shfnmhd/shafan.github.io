@@ -1,0 +1,4 @@
+/* Content and navigation remain usable when scripting is unavailable. */
+.no-js .work-filters,.no-js .case-button,.no-js .motion-toggle{display:none}
+@media(max-width:680px){.no-js .navigation{height:auto;min-height:72px;flex-wrap:wrap;padding-block:18px}.no-js .navigation nav{position:static;display:flex;flex-direction:row;flex-wrap:wrap;width:100%;padding:0;background:transparent;box-shadow:none;border:0;gap:10px 20px}.no-js .navigation nav>a{font-size:12px;padding:8px 0}.no-js .navigation nav>a span{float:none;margin-left:5px}.no-js .navigation nav .nav-contact{margin:0;padding:8px 12px}.no-js .menu-toggle{display:none}}
+html.no-motion{scroll-behavior:auto!important}

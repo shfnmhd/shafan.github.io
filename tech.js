@@ -80,6 +80,7 @@
     fragrance: { name: "VELLUNE", category: "FRAGRANCE / PRODUCT EXPERIENCE", description: "A refined fragrance concept centred around a real-time product study.", direction: "Charcoal, ivory and amber create a restrained luxury palette, paired with editorial ingredient imagery and finely detailed product geometry.", experience: "Move over the modeled bottle, swipe on touch or use the keyboard to inspect every side. The model uses continuous real-time 3D rendering, not a sequence of product photographs. No live purchasing system is connected.", image: "fragrance" },
     audio: { name: "SONVIA", category: "HOME AUDIO / MOTION DESIGN", description: "A premium home-audio concept presented as a cinematic visual story.", direction: "Dark tonal layers and responsive visual motion evoke sound without cluttering the product narrative. Studio imagery anchors the experience.", experience: "Scroll through the story and explore selectable visual listening modes. The concept does not reproduce sound specifications or sell any real products.", image: "audio" }
   };
+  const conceptRoutes = {energy: "volt-rush", clothing: "fieldnote", hospitality: "aster-house", shoes: "stride", services: "goodwork", infrastructure: "axiom-networks", skincare: "miela", fragrance: "vellune", audio: "sonvia"};
   const dialog = $("#case-dialog");
   let dialogTrigger;
   $$("[data-case]").forEach(button => button.addEventListener("click", () => {
@@ -92,7 +93,7 @@
     $("#case-experience").textContent = info.experience;
     $("#case-image").src = `art/${info.image}-preview.webp`;
     $("#case-image").alt = `${info.name} fictional homepage concept`;
-    $("#case-visit").href = `catalogues/${key}/index.html`;
+    $("#case-visit").href = `catalogues/${conceptRoutes[key]}/`;
     $("#case-enquiry").href = whatsappURL(`Hi Shafan, I saw the ${info.name} concept on your portfolio. I'd like to discuss a website with a similar design direction for my business.`);
     dialog.showModal();
     dialog.scrollTop = 0;

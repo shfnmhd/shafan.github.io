@@ -1,0 +1,26 @@
+# SHFN — Freelance Web Developer in the UAE
+
+> Mohammad Sayyad Shafan (SHFN) is a web developer based in Sharjah, UAE, focused on responsive websites, product experiences, WordPress and practical web applications. This site presents services, a portfolio of fictional self-initiated concept projects, and planning guides.
+
+## Services
+
+- [Business websites](https://shfn.me/services/business-websites/): Web design and development for UAE businesses, with responsive pages, clear messaging, practical enquiries, and a maintainable structure. Based in Sharjah.
+- [E-commerce websites](https://shfn.me/services/ecommerce-websites/): E-commerce web design and development for UAE businesses. Product discovery, responsive catalogue pages, checkout planning and practical store workflows.
+- [WordPress websites](https://shfn.me/services/wordpress-websites/): WordPress design and development in Sharjah for UAE businesses. Responsive themes, manageable content, carefully chosen plugins and clear handover.
+- [Custom web apps](https://shfn.me/services/custom-web-apps/): Custom web application development for UAE businesses. Structured data, user roles, responsive interfaces and workflow tools designed around business requirements.
+
+## Portfolio
+
+- [Concept case studies](https://shfn.me/portfolio/): nine fictional website demonstrations, with the design and actual interaction implementation described. They are not commissioned client work, commercial stores or client outcomes.
+
+## Guides
+
+- [Website cost in the UAE](https://shfn.me/guides/website-cost-uae/): Understand UAE website price examples, the difference between a business site, online store and custom app, and what to include in a project brief.
+- [WordPress vs custom websites](https://shfn.me/guides/wordpress-vs-custom-websites/): Compare WordPress and custom website development for UAE small businesses: editing, costs, performance, integrations, ownership and maintenance.
+
+## Contact and site information
+
+- [Portfolio and contact](https://shfn.me/): public contact links and the interactive portfolio.
+- [Sitemap](https://shfn.me/sitemap.xml): canonical indexable pages.
+
+Project scope and pricing are agreed individually; published third-party price examples in the cost guide are not SHFN quotations. No payment, account or transaction is handled by the fictional demos.
